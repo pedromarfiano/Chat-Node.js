@@ -1,0 +1,15 @@
+flaticon.com
+
+conversas: <i class="fi fi-rr-users"></i>
+grupos: <i class="fi fi-rr-users-alt"></i> | <i class="fi fi-br-plus"></i>
+novo usuario: <i class="fi fi-rr-user-add"></i>
+configurações: <i class="fi fi-rs-settings"></i>
+
+sair: <i class="fi fi-rr-power"></i> | <i class="fi fi-br-power"></i>
+
+camera: <i class="fi fi-rr-video-camera-alt"></i>
+telefone: <i class="fi fi-rr-phone-call"></i>
+
+mensagem: img
+pesquisa: <i class="fi fi-rs-search"></i>
+enviar mensagem: <i class="fi fi-rr-paper-plane"></i> | <i class="fi fi-rs-paper-plane"></i>
