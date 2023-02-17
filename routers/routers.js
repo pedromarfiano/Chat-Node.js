@@ -1,4 +1,7 @@
 const router = require('express').Router()
+const con = require('../db/Connect');
+
+const db = new con();
 
 var path = require('path');
 
@@ -16,7 +19,7 @@ router.get('/app/minha_conta', (req, res) => {
 // ROTAS DO BANCO DE DADOS
 
 router.post('/cadastar', (req,res) => {
-
+    db.inserir();
 })
 router.post('/logar', (req, res) => {
 
