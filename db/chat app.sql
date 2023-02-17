@@ -13,3 +13,4 @@ create table dbchat.tbmessages(
     msg_destinatario_id int not null,
 	msg text not null
 );
+insert into dbchat.tbusers(users_name, users_email, users_pass) values('pedro', 'pedro@gmail.com', '123');

@@ -1,4 +1,5 @@
 const mysql = require('mysql');
+const { use } = require('../routers/routers');
 const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
@@ -7,8 +8,19 @@ const db = mysql.createConnection({
 });
 
 class database{
-    inserir(){
-        console.log('inserir')
+    inserir(name, email, pass){
+        let img = "https://api.dicebear.com/5.x/initials/svg?seed="+name;
+        db.query("INSERT INTO tbusers(users_name, users_email, users_pass, users_img) VALUES('"+name+"', '"+email+"', '"+pass+"', '"+img+"')", (err, result) => {
+            if(err) throw err;
+            console.log(result);
+        })
+    }
+    logar(user, pass)
+    {
+        db.query("SELECT * FROM tbusers WHERE users_name = '"+user+"' or users_email = '"+user+"' and users_pass = '"+pass+"';", (err, result) => {
+            if(err) throw err;
+            console.log(result);
+        })
     }
 
 }

@@ -10,7 +10,6 @@ const router = require('./routers/routers.js');
 // var path = require('path');
 
 app.use(session({secret: "1234567890"}))
-app.use(bodyParser.urlencoded({extended:true}));
 
 // ENGINE HTML
 
@@ -32,6 +31,9 @@ router.get('/login', (req, res) => {
 })
 router.get('/cadastro', (req, res) => {
     res.sendFile(__dirname+'/public/views/cadastro.html')
+})
+router.get('*' , (req , res)=>{
+    res.send('ERRO 404')
 })
 
 // OPEN SERVER HTTP
