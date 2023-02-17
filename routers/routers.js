@@ -2,14 +2,33 @@ const router = require('express').Router()
 
 var path = require('path');
 
-
-router.get('/' , (req , res)=>{
-    res.sendFile(__dirname+'../index.html');
+// ROTAS DO APP
+router.get('/app/' , (req , res)=>{
+    res.sendFile(path.join(__dirname, '../public', 'views/app.html'))
 })
-
-
-// router.get('/another-route' , (req , res)=>{
-//     // router code here
+router.get('/app/minha_conta', (req, res) => {
+    res.sendFile(path.join(__dirname, '../public', '/views/conta.html'))
+})
+// router.get('/app/conversas', (req, res) => {
+    
 // })
+
+// ROTAS DO BANCO DE DADOS
+
+router.post('/cadastar', (req,res) => {
+
+})
+router.post('/logar', (req, res) => {
+
+})
+router.put('/alterar', (req, res) => {
+
+})
+router.get('/sair/:id', (req, res) => {
+
+})
+router.delete('/deletar', (req, res) => {
+
+})
 
 module.exports  = router
