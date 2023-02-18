@@ -25,22 +25,30 @@ router.get('/app/minha_conta', (req, res) => {
 
 // ROTAS DO BANCO DE DADOS
 
-router.get('/cadastar', (req,res) => {
+router.post('/cadastar', (req,res) => {
     db.inserir('ana', 'ana@gmail.com', '123');
-    //res.redirect('/')
+    res.redirect('/')
 })
-router.get('/logar', (req, res) => {
+router.post('/logar', (req, res) => {
     db.logar('pedro', '123');
-    //res.redirect('/')
+    res.redirect('/')
 })
-router.put('/alterar', (req, res) => {
-
+router.put('/alterar/:id', (req, res) => {
+    db.alterar('ana', 'ana@gmail.com', '123', req.body.id);
 })
-router.get('/sair/:id', (req, res) => {
-
+router.delete('/deletar/:id', (req, res) => {
+    db.deletar(req.params.id)
+    res.redirect('/')
 })
-router.delete('/deletar', (req, res) => {
-
+router.post('/sair', (req, res) => {
+    // If the user is loggedin
+    if (req.session.conectado) {
+        req.session.conectado = false;
+        res.redirect('/login');
+    }else{
+        // Not logged in
+        res.redirect('/');
+    }
 })
 
 module.exports  = router

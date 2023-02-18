@@ -22,6 +22,15 @@ class database{
             console.log(result);
         })
     }
+    alterar(name, email, pass, id){
+        db.query("UPDATE tbusers SET users_name = '"+name+"', users_email = '"+email+"', users_pass = '"+pass+"' WHERE users_id = '"+id+"' ;")
+    }
+    deletar(id){
+        db.query("DELETE FROM tbusers WHERE users_id = '"+id+"' ;", (err, result) => {
+            if(err) throw err;
+            console.log(result);
+        })
+    }
 
 }
 
