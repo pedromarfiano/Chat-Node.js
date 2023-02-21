@@ -2,14 +2,18 @@
 const app = require('express')();
 const session = require('express-session');
 
-const bodyParser = require('body-parser');
+// const bodyParser = require('body-parser');
 
 const http = require('http').createServer(app);
 const router = require('./routers/routers.js');
 
 // var path = require('path');
 
-app.use(session({secret: "1234567890"}))
+app.use(session({
+    secret: "123123123",
+    saveUninitialized: false,
+    resave: false
+}))
 
 // ENGINE HTML
 

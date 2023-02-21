@@ -1,17 +1,11 @@
-const app = require('express')();
+// const app = require('express')();
 const router = require('express').Router()
-const session = require('express-session');
-
 const bodyParser = require('body-parser');
-const con = require('../db/Connect');
-
-app.use(session({secret: "1234567890"}))
-
-const db = new con();
+const db = require('../db/Connect');
 
 var path = require('path');
 
-app.use(bodyParser.urlencoded({extended:true}));
+router.use(bodyParser.urlencoded({extended:true}));
 
 
 // ROTAS DO APP
@@ -25,31 +19,49 @@ router.get('/app/' , (req , res)=>{
 router.get('/app/minha_conta', (req, res) => {
     res.sendFile(path.join(__dirname, '../public', '/views/conta.html'))
 })
-// router.get('/app/conversas', (req, res) => {
-    
-// })
+
 
 // ROTAS DO BANCO DE DADOS
 
 router.post('/cadastar', (req,res) => {
-    db.inserir('ana', 'ana@gmail.com', '123');
+    let img = "https://api.dicebear.com/5.x/initials/svg?seed="+req.body.User;
+    db.query("INSERT INTO tbusers(users_name, users_email, users_pass, users_img) VALUES(?, ?, ?, ?)",
+    [req.body.User, req.body.Email, req.body.Pass, img], (err, result) => {
+
+        if(err) throw err;
+        console.log(JSON.stringify(result));
+    })
+    // db.inserir('ana', 'ana@gmail.com', '123');
     res.redirect('/app/')
 })
+
+
 router.post('/logar', (req, res) => {
     //var query = []
-    
-    console.log(db.logar('pedro', '123'))
-    req.session.logado = 'logado';
-    res.redirect('/app/')
+    db.query("SELECT * FROM tbusers WHERE users_name = ? or users_email = ? and users_pass = ? LIMIT 1;",
+    [req.body.User, req.body.User, req.body.Pass], async (err, result) => {
+
+        if(err) throw err;
+        req.session.admin = await result;
+        // res.send(req.session.admin);
+        req.session.logado = 'logado';
+        await res.redirect('/app/')
+    })
 })
+
+
 router.put('/alterar/:id', (req, res) => {
-    db.alterar('ana', 'ana@gmail.com', '123', req.params.id);
+    // db.alterar('ana', 'ana@gmail.com', '123', req.params.id);
     res.redirect('/app/minha_conta')
 })
+
+
 router.delete('/deletar/:id', (req, res) => {
-    db.deletar(req.params.id)
+    // db.deletar(req.params.id)
     res.redirect('/')
 })
+
+
 router.post('/sair', (req, res) => {
     // If the user is loggedin
     if (req.session.conectado) {
