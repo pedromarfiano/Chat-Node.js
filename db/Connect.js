@@ -15,12 +15,14 @@ class database{
             console.log(result);
         })
     }
-    logar(user, pass)
+    async logar(user, pass)
     {
-        db.query("SELECT * FROM tbusers WHERE users_name = '"+user+"' or users_email = '"+user+"' and users_pass = '"+pass+"';", (err, result) => {
+        var rows = await db.query("SELECT * FROM tbusers WHERE users_name = '"+user+"' or users_email = '"+user+"' and users_pass = '"+pass+"';", (err, result) => {
             if(err) throw err;
-            console.log(result);
+            rows = JSON.stringify(result)
+            //console.log(rows)
         })
+        return rows
     }
     alterar(name, email, pass, id){
         db.query("UPDATE tbusers SET users_name = '"+name+"', users_email = '"+email+"', users_pass = '"+pass+"' WHERE users_id = '"+id+"' ;")

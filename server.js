@@ -24,12 +24,21 @@ app.use(session({secret: "1234567890"}))
 app.use('/', router);
 
 router.get('/' , (req , res)=>{
+    if(req.session.logado)
+        res.redirect('/app/')
+        
     res.sendFile(__dirname+'/index.html')
 })
 router.get('/login', (req, res) => {
+    if(req.session.logado)
+        res.redirect('/app/')
+    
     res.sendFile(__dirname+'/public/views/login.html')
 })
 router.get('/cadastro', (req, res) => {
+    if(req.session.logado)
+        res.redirect('/app/')
+
     res.sendFile(__dirname+'/public/views/cadastro.html')
 })
 router.get('*' , (req , res)=>{
