@@ -37,7 +37,8 @@ router.post('/cadastar', (req,res) => {
 })
 router.post('/logar', (req, res) => {
     //var query = []
-    db.logar('pedro', '123');
+    
+    console.log(db.logar('pedro', '123'))
     req.session.logado = 'logado';
     res.redirect('/app/')
 })
