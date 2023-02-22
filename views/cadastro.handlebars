@@ -7,6 +7,10 @@
     <title>Cadastro</title>
 </head>
 <body>
+    {{#each erros}}
+        <div class="alert alert-danger">{{texto}}</div>
+        {{else}}
+    {{/each}}
     <form action="/cadastrar" method="post">
         <div>
             <div>
@@ -22,6 +26,9 @@
     
                 <label for="Pass"><p>Senha</p></label>
                 <input type="password" name="Pass" id="">
+
+                <label for="Cpass"><p>Confirmar Senha</p></label>
+                <input type="password" name="Cpass" id="">
     
                 <button type="submit">Criar conta</button>
             </div>

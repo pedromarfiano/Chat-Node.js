@@ -2,6 +2,7 @@
 const app = require('express')();
 const session = require('express-session');
 const { engine } = require('express-handlebars')
+var path = require('path');
 
 // const bodyParser = require('body-parser');
 
@@ -40,19 +41,18 @@ router.get('/login', (req, res) => {
         res.redirect('/app/')
     
     res.render('login')
-    // res.sendFile(__dirname+'/public/views/login.html')
 })
 router.get('/cadastro', (req, res) => {
     if(req.session.logado)
         res.redirect('/app/')
 
     res.render('cadastro')
-    // res.sendFile(__dirname+'/public/views/cadastro.html')
 })
 router.get('*' , (req , res)=>{
 
-    //   MUDAR DEPOIS PARA UM ARQUIVO HTML 404
-    res.send('ERRO 404')
+    res.sendFile(path.join(__dirname, '/views', '/404.html'))
+    res.status(404)
+    
 })
 
 // OPEN SERVER HTTP
