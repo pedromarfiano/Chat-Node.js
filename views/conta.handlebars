@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minha Conta</title>
+</head>
+<body>
+    Minha conta
+    <a href="/app/">app</a>
+    <form action="/alterar/{{admin.users_id}}" method="post">
+        <label for="User"><p>Nome</p></label>
+        <input type="User" name="User" id="" value="{{admin.users_name}}">
+
+        <label for="Email"><p>Email</p></label>
+        <input type="email" name="Email" id="" value="{{admin.users_email}}">
+
+        <label for="Pass"><p>Senha</p></label>
+        <input type="password" name="Pass" id="" value="{{admin.users_pass}}">
+
+        <button type="submit">alterar</button>
+    </form>
+    <form action="/sair" method="post">
+        <button type="submit">sair</button>
+    </form>
+    <form action="/deletar/{{admin.users_id}}" method="post">
+        <button type="submit">deletar conta</button>
+    </form>
+</body>
+</html>
