@@ -130,27 +130,40 @@ router.post('/logar', (req, res) => {
 router.post('/alterar/:id', (req, res) => {
     var erros = []
 
-    db.query("UPDATE tbusers SET users_name = ?, users_email = ?, users_pass = ? WHERE users_id = ? LIMIT 1;",
-    [req.body.User, req.body.Email, req.body.Pass, req.params.id], async (err, result) => {
+    if(req.body.User == null || req.body.User == '' || typeof req.body.User == undefined || req.body.User.length <2){
+        erros.push({texto: 'usuario invalido'})
+    }
+    if(req.body.Email == null || req.body.Email == '' || typeof req.body.Email == undefined || req.body.Email.length <10){
+        erros.push({texto: 'usuario invalido'})
+    }
+    if(req.body.Pass == null || req.body.Pass == '' || typeof req.body.Pass == undefined || req.body.Pass.length <5){
+        erros.push({texto: 'senha invalida'})
+    }
+    if(erros.length != 0){
+        res.render('conta', {erros: erros})
+    } else{
+        db.query("UPDATE tbusers SET users_name = ?, users_email = ?, users_pass = ? WHERE users_id = ? LIMIT 1;",
+        [req.body.User, req.body.Email, req.body.Pass, req.params.id], async (err, result) => {
 
-        if(err){
-            erros.push({texto: 'Ops! Algo deu errado'});
-            res.render('conta', {erros: erros})
-        }else {
+            if(err){
+                erros.push({texto: 'Ops! Algo deu errado'});
+                res.render('conta', {erros: erros})
+            }else {
 
-            db.query("SELECT * FROM tbusers WHERE users_email = ? and users_pass = ? LIMIT 1;",
-            [req.body.Email, req.body.Pass], async (err, result) => {
+                db.query("SELECT * FROM tbusers WHERE users_email = ? and users_pass = ? LIMIT 1;",
+                [req.body.Email, req.body.Pass], async (err, result) => {
 
-                if(err){
-                    erros.push({texto: 'Ops! Algo deu errado'});
-                    res.render('conta', {erros: erros})
-                }else {
-                    req.session.admin = await result;
-                    await res.redirect('/app/minha_conta')
-                }
-            })
-        }
-    })
+                    if(err){
+                        erros.push({texto: 'Ops! Algo deu errado'});
+                        res.render('conta', {erros: erros})
+                    }else {
+                        req.session.admin = await result;
+                        await res.redirect('/app/minha_conta')
+                    }
+                })
+            }
+        })
+    }
 })
 
 
