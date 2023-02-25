@@ -1,16 +1,18 @@
 // CARREGANDO MODULOS
 const express = require('express')
-const app = express();
 const session = require('express-session');
 const { engine } = require('express-handlebars')
 var path = require('path');
-
-// const bodyParser = require('body-parser');
-
-const http = require('http').createServer(app);
 const router = require('./routers/routers.js');
 
-// var path = require('path');
+const app = express();
+const http = require('http').createServer(app);
+const io = require('socket.io')(http);
+
+// server-side
+io.on("connection", (socket) => {
+    console.log(socket.id); // ojIckSD2jqNzOqIrAGzL
+});
 
 app.use(session({
     secret: "123123123",
@@ -23,9 +25,6 @@ app.use(session({
 app.engine('handlebars', engine());
 app.set('view engine', 'handlebars');
 app.use(express.static('./public'))
-// app.set('views', './public/views');
-// use.set('views', path.join(__dirname, '/public/views'));
-
 
 // ROTAS
 
