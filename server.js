@@ -37,14 +37,22 @@ router.get('/' , (req , res)=>{
     res.sendFile(__dirname+'/index.html')
 })
 router.get('/login', (req, res) => {
-    if(req.session.logado)
+    if(req.session.logado){
         res.redirect('/app/')
+    }
+    if(req.session.erros){
+        res.render('login', {erros: req.session.erros})
+    } 
     
     res.render('login')
 })
 router.get('/cadastro', (req, res) => {
-    if(req.session.logado)
+    if(req.session.logado){
         res.redirect('/app/')
+    }
+    if(req.session.erros){
+        res.render('cadastro', {erros: req.session.erros})
+    } 
 
     res.render('cadastro')
 })

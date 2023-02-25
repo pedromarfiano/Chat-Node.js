@@ -56,7 +56,9 @@ router.post('/cadastrar', (req,res) => {
         erros.push({texto: 'confirme sua senha'})
     }
     if(erros.length != 0){
-        res.render('cadastro', {erros: erros})
+        // SE EXISTIR UM ERRO ELE SERÁ SALVO EM UMA SESSÃO E ENVIADO PARA SUA PAGINA
+        req.session.erros = erros
+        res.redirect('/cadastro');
     } else{
         // CONSULTA AO BANCO DE DADOS
         let img = "https://api.dicebear.com/5.x/initials/svg?seed="+req.body.User;
@@ -66,7 +68,8 @@ router.post('/cadastrar', (req,res) => {
 
             if(err){
                 erros.push({texto: 'Ops! Algo deu errado'});
-                res.render('cadastro', {erros: erros})
+                req.session.erros = erros
+                res.redirect('/cadastro');
             }else {
 
                 db.query("SELECT * FROM tbusers WHERE users_email = ? and users_pass = ? LIMIT 1;",
@@ -74,7 +77,8 @@ router.post('/cadastrar', (req,res) => {
 
                     if(err){
                         erros.push({texto: 'Ops! Algo deu errado'});
-                        res.render('cadastro', {erros: erros})
+                        req.session.erros = erros
+                        res.redirect('/cadastro');
                     }else {
                         req.session.admin = await result;
                         req.session.logado = 'logado';
@@ -100,7 +104,9 @@ router.post('/logar', (req, res) => {
         erros.push({texto: 'senha invalida'})
     }
     if(erros.length != 0){
-        res.render('login', {erros: erros})
+        // SE EXISTIR UM ERRO ELE SERÁ SALVO EM UMA SESSÃO E ENVIADO PARA SUA PAGINA
+        req.session.erros = erros
+        res.redirect('/login');
     } else{
 
         // CONSULTA AO BANCO DE DADOS
@@ -109,7 +115,8 @@ router.post('/logar', (req, res) => {
 
             if(err){
                 erros.push({texto: 'Ops! Algo deu errado'});
-                res.render('login', {erros: erros})
+                req.session.erros = erros
+                res.redirect('/login');
             }else {
                 req.session.admin = await result;
                 req.session.logado = 'logado';
@@ -135,14 +142,17 @@ router.post('/alterar/:id', (req, res) => {
         erros.push({texto: 'senha invalida'})
     }
     if(erros.length != 0){
-        res.render('conta', {erros: erros})
+        // SE EXISTIR UM ERRO ELE SERÁ SALVO EM UMA SESSÃO E ENVIADO PARA SUA PAGINA
+        req.session.erros = erros
+        res.redirect('/app/minha_conta');
     } else{
         db.query("UPDATE tbusers SET users_name = ?, users_email = ?, users_pass = ? WHERE users_id = ? LIMIT 1;",
         [req.body.User, req.body.Email, req.body.Pass, req.params.id], async (err, result) => {
 
             if(err){
                 erros.push({texto: 'Ops! Algo deu errado'});
-                res.render('conta', {erros: erros})
+                req.session.erros = erros
+                res.redirect('/app/minha_conta');
             }else {
 
                 db.query("SELECT * FROM tbusers WHERE users_email = ? and users_pass = ? LIMIT 1;",
@@ -150,7 +160,8 @@ router.post('/alterar/:id', (req, res) => {
 
                     if(err){
                         erros.push({texto: 'Ops! Algo deu errado'});
-                        res.render('conta', {erros: erros})
+                        req.session.erros = erros
+                        res.redirect('/app/minha_conta');
                     }else {
                         req.session.admin = await result;
                         await res.redirect('/app/minha_conta')
@@ -169,7 +180,8 @@ router.post('/deletar/:id', (req, res) => {
     [req.params.id], (err, result) => {
         if(err){
             erros.push({texto: 'Ops! Algo deu errado'});
-            res.render('conta', {erros: erros})
+            req.session.erros = erros
+            res.redirect('/app/minha_conta');
         }else {
             req.session.destroy(null);
             // res.clearCookie(this.cookie, { path: '/' });
