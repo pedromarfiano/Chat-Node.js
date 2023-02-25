@@ -1,5 +1,6 @@
 // CARREGANDO MODULOS
-const app = require('express')();
+const express = require('express')
+const app = express();
 const session = require('express-session');
 const { engine } = require('express-handlebars')
 var path = require('path');
@@ -21,6 +22,7 @@ app.use(session({
 
 app.engine('handlebars', engine());
 app.set('view engine', 'handlebars');
+app.use(express.static('./public'))
 // app.set('views', './public/views');
 // use.set('views', path.join(__dirname, '/public/views'));
 

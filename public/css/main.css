@@ -1,3 +1,9 @@
-body {
-  background-color: aliceblue;
+@import url("https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css");
+* {
+  margin: 0%;
+  padding: 0%;
+}
+
+html:root {
+  --white1: #FFFFFF;
 }/*# sourceMappingURL=main.css.map */

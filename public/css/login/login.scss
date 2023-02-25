@@ -1,0 +1,66 @@
+@import url("../main.css");
+
+// -- Claro --
+
+$white1: #FFFFFF;
+$white2: #F5F8FD;
+$white3: #FFFFFF;
+
+$active: #1174EB;
+$cancel: #F96F61;
+
+$title: #FFFFFF;
+$text1: #111111;
+$text2: #8797AF;
+
+$msg1: #E1F1FF;
+$msg2: #F5F8FD;
+
+// -- Noturno --
+
+.night_mode{
+    $black1: #262E35;
+    $black2: #303841;
+    $black3: #37404A;
+
+    $active: #72C977;
+    $cancel: #F96F61;
+
+    $title: #FFFFFF;
+    $text1: #EFEFF7;
+    $text2: #8D96A0;
+
+    $msg1: #37404A;
+    $msg2: #4C5562;
+}
+
+body{
+    display: block;
+}
+
+.container_text{
+    background-color: $active;
+    color: $white1;
+
+    height: 100vh;
+    width: 100%;
+}
+.container_form{
+    background-color: $white1;
+
+    height: 100vh;
+    width: 100%;
+}
+
+
+
+@media (min-width:320px)  { /* smartphones, portrait iPhone, portrait 480x320 phones (Android) */ }
+@media (min-width:480px)  { 
+    /* smartphones, Android phones, landscape iPhone */ 
+
+
+}
+@media (min-width:600px)  { /* portrait tablets, portrait iPad, e-readers (Nook/Kindle), landscape 800x480 phones (Android) */ }
+@media (min-width:801px)  { /* tablet, landscape iPad, lo-res laptops ands desktops */ }
+@media (min-width:1025px) { /* big landscape tablets, laptops, and desktops */ }
+@media (min-width:1281px) { /* hi-res laptops and desktops */ }

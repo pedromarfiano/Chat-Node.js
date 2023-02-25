@@ -4,35 +4,45 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/login/login.css">
     <title>Login</title>
 </head>
 <body>
-    {{#each erros}}
-        <div class="alert alert-danger">{{texto}}</div>
-        {{else}}
-    {{/each}}
-    <form action="/logar" method="post">
-        <div>
-            <div>
-                <span>icone</span>
-                <P>bem vindo de volta <br> por favor entre em sua conta</P>
+    <div class="container_text">
+        <h1>Bem vindo</h1>
+        <h2>usuario</h2>
+        <p>balbalablalsnvkjnlshbv lhavbdakavblk</p>
+    </div>
+    <div class="container_form">
+        <form action="/logar" method="post">
+            <div class="alert_form">
+                {{#each erros}}
+                    <div class="alert alert-danger">{{texto}}</div>
+                    {{else}}
+                {{/each}}
             </div>
             <div>
-                <label for="User"><p>Nome</p></label>
-                <input type="User" name="User" id="">
+                <div>
+                    <img src="/imgs/conversation.png" alt="icone de conversas">
+                    <P>bem vindo de volta <br> por favor entre em sua conta</P>
+                </div>
+                <div>
+                    <label for="User"><p>Nome</p></label>
+                    <input type="User" name="User" id="">
 
-                <label for="Pass"><p>Senha</p></label>
-                <input type="password" name="Pass" id="">
+                    <label for="Pass"><p>Senha</p></label>
+                    <input type="password" name="Pass" id="">
 
-                <a href="">esqueceu a senha?</a>
+                    <a href="">esqueceu a senha?</a>
 
-                <button type="submit">login</button>
+                    <button type="submit">login</button>
+                </div>
             </div>
-        </div>
-        <div>
-            <a href="/cadastro">não tem conta</a>
-            <button type="submit"><a href="/cadastro">Criar conta</a></button>
-        </div>
-    </form>
+            <div>
+                <a href="/cadastro">não tem conta</a>
+                <button><a href="/cadastro">Criar conta</a></button>
+            </div>
+        </form>
+    </div>
 </body>
 </html>
