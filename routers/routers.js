@@ -1,7 +1,7 @@
 // const app = require('express')();
 const router = require('express').Router()
 const bodyParser = require('body-parser');
-const db = require('../db/Connect');
+const db = require('../config/db/Connect');
 
 var path = require('path');
 
@@ -18,8 +18,6 @@ router.get('/app/' , (req , res)=>{
         // mostra no termina o valor do id
         res.render('app', {admin: row})
 
-        // res.sendFile(path.join(__dirname, '../public', 'views/app.html'))
-
     } else{
         res.redirect('/');
     }
@@ -32,13 +30,10 @@ router.get('/app/minha_conta', (req, res) => {
         // mostra no termina o valor do id
         res.render('conta', {admin: row})
 
-        // res.sendFile(path.join(__dirname, '../public', 'views/app.html'))
 
     } else{
         res.redirect('/');
     }
-
-    // res.sendFile(path.join(__dirname+'./views/conta.html'))
 })
 
 
@@ -52,7 +47,7 @@ router.post('/cadastrar', (req,res) => {
         erros.push({texto: 'usuario invalido'})
     }
     if(req.body.Email == null || req.body.Email == '' || typeof req.body.Email == undefined || req.body.Email.length <10){
-        erros.push({texto: 'usuario invalido'})
+        erros.push({texto: 'email invalido'})
     }
     if(req.body.Pass == null || req.body.Pass == '' || typeof req.body.Pass == undefined || req.body.Pass.length <5){
         erros.push({texto: 'senha invalida'})
@@ -134,7 +129,7 @@ router.post('/alterar/:id', (req, res) => {
         erros.push({texto: 'usuario invalido'})
     }
     if(req.body.Email == null || req.body.Email == '' || typeof req.body.Email == undefined || req.body.Email.length <10){
-        erros.push({texto: 'usuario invalido'})
+        erros.push({texto: 'email invalido'})
     }
     if(req.body.Pass == null || req.body.Pass == '' || typeof req.body.Pass == undefined || req.body.Pass.length <5){
         erros.push({texto: 'senha invalida'})
@@ -170,7 +165,7 @@ router.post('/alterar/:id', (req, res) => {
 router.post('/deletar/:id', (req, res) => {
     var erros = []
 
-    db.query("DELETE FROM tbusers WHERE users_id = ?",
+    db.query("DELETE FROM tbusers WHERE users_id = ? LIMIT 1",
     [req.params.id], (err, result) => {
         if(err){
             erros.push({texto: 'Ops! Algo deu errado'});
