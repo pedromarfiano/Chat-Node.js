@@ -65,6 +65,6 @@ router.get('*' , (req , res)=>{
 })
 
 // OPEN SERVER HTTP
-http.listen(8081,'10.0.0.104', () =>{
+http.listen(8081, () =>{
     console.log('Server connect!')
 });

@@ -7,36 +7,45 @@
     <title>Cadastro</title>
 </head>
 <body>
-    {{#each erros}}
-        <div class="alert alert-danger">{{texto}}</div>
-        {{else}}
-    {{/each}}
-    <form action="/cadastrar" method="post">
-        <div>
-            <div>
-                <span>icone</span>
-                <P>bem vindo de volta <br> por favor entre em sua conta</P>
+    <div class="container_text">
+        <h1>Bem vindo</h1>
+        <h2>usuario</h2>
+        <p>balbalablalsnvkjnlshbv lhavbdakavblk</p>
+    </div>
+    <div class="container_form">
+        <form action="/logar" method="post">
+            <div class="alert_form">
+                {{#each erros}}
+                    <div class="alert alert-danger">{{texto}}</div>
+                    {{else}}
+                {{/each}}
             </div>
             <div>
-                <label for="User"><p>Nome</p></label>
-                <input type="User" name="User" id="">
-    
-                <label for="Email"><p>Email</p></label>
-                <input type="email" name="Email" id="">
-    
-                <label for="Pass"><p>Senha</p></label>
-                <input type="password" name="Pass" id="">
+                <div>
+                    <img src="/imgs/conversation.png" alt="icone de conversas">
+                    <P class="text_form">bem vindo de volta <br> por favor entre em sua conta</P>
+                </div>
+                <div class="inputs">
+                    <label for="User"><p>Nome</p></label>
+                    <input type="User" name="User" id="">
+        
+                    <label for="Email"><p>Email</p></label>
+                    <input type="email" name="Email" id="">
+        
+                    <label for="Pass"><p>Senha</p></label>
+                    <input type="password" name="Pass" id="">
 
-                <label for="Cpass"><p>Confirmar Senha</p></label>
-                <input type="password" name="Cpass" id="">
-    
-                <button type="submit">Criar conta</button>
+                    <label for="Cpass"><p>Confirmar Senha</p></label>
+                    <input type="password" name="Cpass" id="">
+        
+                    <button type="submit">Criar conta</button>
+                </div>
             </div>
-        </div>
-        <div>
-            <a href="/login">ja tenho conta</a>
-            <button type="submit"><a href="/login">Entrar</a></button>
-        </div>
-    </form>
+            <nav>
+                <a href="/login">ja tenho conta</a>
+                <button type="submit"><a href="/login">Entrar</a></button>
+            </nav>
+        </form>
+    </div>
 </body>
 </html>
