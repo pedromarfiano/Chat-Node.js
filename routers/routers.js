@@ -16,7 +16,7 @@ router.get('/app/' , (req , res)=>{
         // puxa o 1 valor de admin que é um array de objetos
         const row = admin[0]
         // mostra no termina o valor do id
-        res.render('app', {admin: row})
+        res.render('app', {admin: row, title: "Whatzipps"})
 
     } else{
         res.redirect('/');

@@ -1,16 +1,85 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <script>
-        const socket = io()
-    </script>
+  
 <body>
-    App: {{admin.users_id}} <br>
-    Nome: {{admin.users_name}}
-    <a href="/app/minha_conta">minha conta</a>
+    <header>
+        <div class="logo">
+            <img src="" alt="logo"> <h1>Whatzip</h1>
+        </div>
+        <nav>
+            <ul>
+                <li>
+                    <a href="#"><i class="fa-solid fa-user"></i></a>
+                </li>
+                <li>
+                    <a href="#"><i class="fa-solid fa-address-book"></i></a>
+                </li>
+                <li>
+                    <a href="/app/minha_conta"><i class="fa-solid fa-gear"></i></a>
+                </li>
+            </ul>
+        </nav>
+        <div>
+            <form action="/deletar" method="post">
+                <button type="submit"><i class="fa-solid fa-power-off"></i></button>
+            </form>
+        </div>
+    </header>
+        
+    <!--SESSÃO ONDE CONTEM AS INFORMAÇÕES QUE IRÃO MUDAR-->
+    <section>
+        <h1>Whatzipps</h1>
+
+        <div class="search_bar">
+
+            <input type="text" id="txtBusca" placeholder="Buscar..."/>
+            <button><i>icone de busca</i></button>
+            
+        </div>
+
+        <div class="contatos">
+            <div class="contato">
+                <div class="msg_img">
+                    <img src="/src/img/transferir.jpg" id="img">
+                </div>
+                <div class="msg_text">
+                    <h3>nome</h3>
+                    <p>conversa</p>
+                </div>
+                <div class="msg_hora">
+                    <p>10:00</p>
+                </div>
+            </div>
+        </div>
+    </section>
+                        
+    <main>
+        <div class="contato_ativo">
+            <div class="contato_img">
+                <img src="/src/img/transferir.jpg" id="img">
+            </div>
+            <div class="contato_text">
+                <h3>nome</h3>
+                <p>escrevendo</p>
+            </div>
+            <div>
+                <a href="#"><p>informaçõs do contato</p></a>
+            </div>
+        </div>
+            
+
+        <div class="mensagens">
+            <div class="my_msg"><p>oi</p></div>
+            <div class="your_msg"><p>oi</p></div>
+        </div>
+
+        <div class="contato_input">
+            <input type="text" id="txtMsg" placeholder="Ola..."/>
+            <button><i>mandar</i></button>
+        </div>
+                
+    </main> 
 </body>
-</html>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+        const socket = io()
+</script>
