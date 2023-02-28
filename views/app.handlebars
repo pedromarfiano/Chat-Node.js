@@ -73,7 +73,7 @@
 
         <div class="contato_input">
             <input type="text" id="txtMsg" placeholder="Ola..."/>
-            <button><i>mandar</i></button>
+            <button id="btn_env_msg" onclick="env_mensage()"><i>mandar</i></button>
         </div>
                 
     </main> 
@@ -81,5 +81,20 @@
 
 <script src="/socket.io/socket.io.js"></script>
 <script>
-        const socket = io()
+    input_msg = document.querySelector('#txtMsg');
+    btn_env_msg = document.querySelector('#btn_env_msg');
+    div_msg = document.querySelector('.mensagens');
+
+    const socket = io()
+
+    {{!-- socket.on('msg', (msg) =>{
+        console.log(msg);
+    }) --}}
+
+    function env_mensage(){
+        if(input_msg.value != 0){
+            socket.emit('msg', input_msg.value);
+            input_msg.value = null;
+        }
+    }
 </script>

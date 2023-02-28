@@ -12,6 +12,9 @@ const io = require('socket.io')(http);
 // server-side
 io.on("connection", (socket) => {
     console.log(socket.id); // ojIckSD2jqNzOqIrAGzL
+    socket.on('msg', (msg) =>{
+        console.log(msg)
+    })
 });
 
 app.use(session({
