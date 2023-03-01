@@ -87,9 +87,9 @@
 
     const socket = io()
 
-    {{!-- socket.on('msg', (msg) =>{
+    socket.on('msgServer', (msg) =>{
         console.log(msg);
-    }) --}}
+    })
 
     function env_mensage(){
         if(input_msg.value != 0){

@@ -13,7 +13,7 @@ const io = require('socket.io')(http);
 io.on("connection", (socket) => {
     console.log(socket.id); // ojIckSD2jqNzOqIrAGzL
     socket.on('msg', (msg) =>{
-        console.log(msg)
+        socket.emit('msgServer', msg);
     })
 });
 
