@@ -81,9 +81,14 @@
 
 <script src="/socket.io/socket.io.js"></script>
 <script>
-    input_msg = document.querySelector('#txtMsg');
-    btn_env_msg = document.querySelector('#btn_env_msg');
-    div_msg = document.querySelector('.mensagens');
+    var input_msg = document.querySelector('#txtMsg');
+    var btn_env_msg = document.querySelector('#btn_env_msg');
+    var div_msg = document.querySelector('.mensagens');
+    var div = document.createElement('div');
+
+
+    // CASO O EMAIL DA MENSAGEM SEJÁ DIFERENTE DO MEU : RECEBERA A CLASSE YOUR_MSG
+    div.classList('your_msg');
 
     const socket = io()
 
