@@ -9,14 +9,6 @@ const app = express();
 const http = require('http').createServer(app);
 const io = require('socket.io')(http);
 
-// server-side
-io.on("connection", (socket) => {
-    console.log(socket.id); // ojIckSD2jqNzOqIrAGzL
-    socket.on('msg', (msg) =>{
-        socket.emit('msgServer', msg);
-    })
-});
-
 app.use(session({
     secret: "123123123",
     saveUninitialized: false,
@@ -28,6 +20,19 @@ app.use(session({
 app.engine('handlebars', engine());
 app.set('view engine', 'handlebars');
 app.use(express.static('./public'))
+
+
+// SERVIDOR WS
+io.on("connection", (socket) => {
+    //console.log(socket.id); // ojIckSD2jqNzOqIrAGzL
+    socket.on('msg', (msg) =>{
+        socket.emit('msgServer', mensagem = JSON.stringify({
+            "remetente": "ana",
+            "destinatario": "jonas",
+            "mensagem": msg
+        }));
+    })
+});
 
 // ROTAS
 
@@ -45,7 +50,7 @@ router.get('/login', (req, res) => {
         res.redirect('/app/')
     }
     if(req.session.erros){
-        res.render('login', {erros: req.session.erros})
+        res.render('login', {erros: req.session.erros, title: "Login"})
     } 
     
     res.render('login')
@@ -55,7 +60,7 @@ router.get('/cadastro', (req, res) => {
         res.redirect('/app/')
     }
     if(req.session.erros){
-        res.render('cadastro', {erros: req.session.erros})
+        res.render('cadastro', {erros: req.session.erros, title: "Cadastro"})
     } 
 
     res.render('cadastro')

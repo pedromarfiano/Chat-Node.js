@@ -18,7 +18,7 @@
             </ul>
         </nav>
         <div>
-            <form action="/deletar" method="post">
+            <form action="/sair" method="post">
                 <button type="submit"><i class="fa-solid fa-power-off"></i></button>
             </form>
         </div>
@@ -36,7 +36,7 @@
         </div>
 
         <div class="contatos">
-            <div class="contato">
+            {{!-- <div class="contato">
                 <div class="msg_img">
                     <img src="/src/img/transferir.jpg" id="img">
                 </div>
@@ -47,7 +47,21 @@
                 <div class="msg_hora">
                     <p>10:00</p>
                 </div>
-            </div>
+            </div> --}}
+            {{#each users}}
+                <div class="contato">
+                    <div class="msg_img">
+                        <img src="{{users_img}}" id="img">
+                    </div>
+                    <div class="msg_text">
+                        <h3>{{users_name}}</h3>
+                        <p>conversa</p>
+                    </div>
+                    <div class="msg_hora">
+                        <p>10:00</p>
+                    </div>
+                </div>
+            {{/each}}
         </div>
     </section>
                         
@@ -67,8 +81,8 @@
             
 
         <div class="mensagens">
-            <div class="my_msg"><p>oi</p></div>
-            <div class="your_msg"><p>oi</p></div>
+            <!--<div class="my_msg msg"><p>oi</p></div>
+            <div class="your_msg msg"><p>oi</p></div>-->
         </div>
 
         <div class="contato_input">
@@ -82,18 +96,24 @@
 <script src="/socket.io/socket.io.js"></script>
 <script>
     var input_msg = document.querySelector('#txtMsg');
-    var btn_env_msg = document.querySelector('#btn_env_msg');
+    //var btn_env_msg = document.querySelector('#btn_env_msg');
     var div_msg = document.querySelector('.mensagens');
     var div = document.createElement('div');
 
-
     // CASO O EMAIL DA MENSAGEM SEJÁ DIFERENTE DO MEU : RECEBERA A CLASSE YOUR_MSG
-    div.classList('your_msg');
+    //div.classList('your_msg');
 
     const socket = io()
 
-    socket.on('msgServer', (msg) =>{
-        console.log(msg);
+    socket.on('msgServer', (mensagem) =>{
+        msg = JSON.parse(mensagem);
+
+        div.classList.add('msg');
+        div.innerHTML = `<p>${msg.mensagem}</p>`
+
+        div_msg.appendChild(div);
+
+        console.log(msg.mensagem);
     })
 
     function env_mensage(){

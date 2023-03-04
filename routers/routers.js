@@ -15,8 +15,19 @@ router.get('/app/' , (req , res)=>{
         const admin = req.session.admin;
         // puxa o 1 valor de admin que é um array de objetos
         const row = admin[0]
-        // mostra no termina o valor do id
-        res.render('app', {admin: row, title: "Whatzipps"})
+        // status se torna online
+        row.users_status = true;
+
+        // usuarios
+        db.query("SELECT * FROM tbusers WHERE users_id != ?", [row.users_id], (err, result) => {
+            if(err) throw err;
+            console.log(result)
+            res.render('app', {admin: row, users: result, title: "Whatzipps"})
+        })
+
+
+
+        //res.render('app', {admin: row, title: "Whatzipps"})
 
     } else{
         res.redirect('/');
@@ -28,7 +39,7 @@ router.get('/app/minha_conta', (req, res) => {
         // puxa o 1 valor de admin que é um array de objetos
         const row = admin[0]
         // mostra no termina o valor do id
-        res.render('conta', {admin: row})
+        res.render('conta', {admin: row, title: "Whatzipps"})
 
 
     } else{
