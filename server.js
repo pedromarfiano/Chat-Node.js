@@ -2,7 +2,8 @@
 const express = require('express')
 const session = require('express-session');
 const { engine } = require('express-handlebars')
-var path = require('path');
+const cookie = require('cookie');
+const path = require('path');
 const router = require('./routers/routers.js');
 
 const app = express();
@@ -20,6 +21,9 @@ app.use(session({
 app.engine('handlebars', engine());
 app.set('view engine', 'handlebars');
 app.use(express.static('./public'))
+
+// COOKIES
+app.use(cookie());
 
 
 // SERVIDOR WS
@@ -40,15 +44,15 @@ io.on("connection", (socket) => {
 app.use('/', router);
 
 router.get('/' , (req , res)=>{
-    if(req.session.logado)
+    if(req.session.logado || res.cookie.logado)
         res.redirect('/app/')
         
     res.sendFile(__dirname+'/index.html')
 })
 router.get('/login', (req, res) => {
-    if(req.session.logado){
+    if(req.session.logado || res.cookie.logado)
         res.redirect('/app/')
-    }
+
     if(req.session.erros){
         res.render('login', {erros: req.session.erros, title: "Login"})
     } 
@@ -56,9 +60,9 @@ router.get('/login', (req, res) => {
     res.render('login')
 })
 router.get('/cadastro', (req, res) => {
-    if(req.session.logado){
+    if(req.session.logado || res.cookie.logado)
         res.redirect('/app/')
-    }
+
     if(req.session.erros){
         res.render('cadastro', {erros: req.session.erros, title: "Cadastro"})
     } 
@@ -66,6 +70,8 @@ router.get('/cadastro', (req, res) => {
     res.render('cadastro')
 })
 router.get('*' , (req , res)=>{
+    if(req.session.logado || res.cookie.logado)
+        res.redirect('/app/')
 
     res.sendFile(path.join(__dirname, '/views', '/404.html'))
     res.status(404)

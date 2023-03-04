@@ -11,7 +11,7 @@ router.use(bodyParser.urlencoded({extended:true}));
 
 // ROTAS DO APP
 router.get('/app/' , (req , res)=>{
-    if(req.session.logado){
+    if(req.session.logado || res.cookie.logado){
         const admin = req.session.admin;
         // puxa o 1 valor de admin que é um array de objetos
         const row = admin[0]
@@ -34,7 +34,7 @@ router.get('/app/' , (req , res)=>{
     }
 })
 router.get('/app/minha_conta', (req, res) => {
-    if(req.session.logado){
+    if(req.session.logado  || res.cookie.logado){
         const admin = req.session.admin;
         // puxa o 1 valor de admin que é um array de objetos
         const row = admin[0]
@@ -93,6 +93,7 @@ router.post('/cadastrar', (req,res) => {
                     }else {
                         req.session.admin = await result;
                         req.session.logado = 'logado';
+                        res.cookie("logado", result[0].users_id)
                         await res.redirect('/app/')
                     }
                 })
@@ -131,6 +132,7 @@ router.post('/logar', (req, res) => {
             }else {
                 req.session.admin = await result;
                 req.session.logado = 'logado';
+                res.cookie("logado", result[0].users_id)
                 await res.redirect('/app/')
             }
             
@@ -195,7 +197,7 @@ router.post('/deletar/:id', (req, res) => {
             res.redirect('/app/minha_conta');
         }else {
             req.session.destroy(null);
-            // res.clearCookie(this.cookie, { path: '/' });
+            res.clearCookie();
             res.redirect('/');
         }
     })
@@ -203,9 +205,9 @@ router.post('/deletar/:id', (req, res) => {
 
 
 router.post('/sair', (req, res) => {
-    if (req.session.logado) {
+    if (req.session.logado  || res.cookie.logado) {
         req.session.destroy(null);
-        // res.clearCookie(this.cookie, { path: '/' });
+        res.clearCookie();
         res.redirect('/login');
     }else{
         res.redirect('/');
