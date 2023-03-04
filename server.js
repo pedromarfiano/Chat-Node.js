@@ -2,7 +2,7 @@
 const express = require('express')
 const session = require('express-session');
 const { engine } = require('express-handlebars')
-const cookie = require('cookie');
+const cookieparser = require('cookie-parser');
 const path = require('path');
 const router = require('./routers/routers.js');
 
@@ -23,7 +23,7 @@ app.set('view engine', 'handlebars');
 app.use(express.static('./public'))
 
 // COOKIES
-app.use(cookie());
+app.use(cookieparser());
 
 
 // SERVIDOR WS
@@ -44,13 +44,13 @@ io.on("connection", (socket) => {
 app.use('/', router);
 
 router.get('/' , (req , res)=>{
-    if(req.session.logado || res.cookie.logado)
+    if(req.session.logado || res.cookie('logado'))
         res.redirect('/app/')
         
     res.sendFile(__dirname+'/index.html')
 })
 router.get('/login', (req, res) => {
-    if(req.session.logado || res.cookie.logado)
+    if(req.session.logado || res.cookie('logado'))
         res.redirect('/app/')
 
     if(req.session.erros){
@@ -60,7 +60,7 @@ router.get('/login', (req, res) => {
     res.render('login')
 })
 router.get('/cadastro', (req, res) => {
-    if(req.session.logado || res.cookie.logado)
+    if(req.session.logado || res.cookie('logado'))
         res.redirect('/app/')
 
     if(req.session.erros){
@@ -70,7 +70,7 @@ router.get('/cadastro', (req, res) => {
     res.render('cadastro')
 })
 router.get('*' , (req , res)=>{
-    if(req.session.logado || res.cookie.logado)
+    if(req.session.logado || res.cookie('logado'))
         res.redirect('/app/')
 
     res.sendFile(path.join(__dirname, '/views', '/404.html'))

@@ -11,7 +11,7 @@ router.use(bodyParser.urlencoded({extended:true}));
 
 // ROTAS DO APP
 router.get('/app/' , (req , res)=>{
-    if(req.session.logado || res.cookie.logado){
+    if(req.session.logado || res.cookie('logado')){
         const admin = req.session.admin;
         // puxa o 1 valor de admin que é um array de objetos
         const row = admin[0]
@@ -34,7 +34,7 @@ router.get('/app/' , (req , res)=>{
     }
 })
 router.get('/app/minha_conta', (req, res) => {
-    if(req.session.logado  || res.cookie.logado){
+    if(req.session.logado  || res.cookie('logado')){
         const admin = req.session.admin;
         // puxa o 1 valor de admin que é um array de objetos
         const row = admin[0]
@@ -205,7 +205,7 @@ router.post('/deletar/:id', (req, res) => {
 
 
 router.post('/sair', (req, res) => {
-    if (req.session.logado  || res.cookie.logado) {
+    if (req.session.logado  || res.cookie('logado')) {
         req.session.destroy(null);
         res.clearCookie();
         res.redirect('/login');
