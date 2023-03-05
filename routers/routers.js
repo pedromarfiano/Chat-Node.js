@@ -4,19 +4,41 @@ const bodyParser = require('body-parser');
 const db = require('../config/db/Connect');
 
 var path = require('path');
+const { type } = require('os');
 
 router.use(bodyParser.urlencoded({extended:true}));
 
 // CONFIGURANDO ENDINE HANDLEBARS
 
+router.get('/' , (req , res)=>{
+    // if(req.session.logado){
+    //     res.redirect('/app/')
+    // }
+    if(res.cookie.logado === undefined){
+        res.send("dont exist")
+        // db.query("SELECT * FROM tbusers WHERE users_id = ? LIMIT 1", [res.cookie.logado], async (err, result) => {
+        //     if(err) res.redirect('/');
+
+        //     req.session.admin = await result;
+        //     console.log(req.session.admin)
+        //     req.session.logado = 'logado';
+        //     res.redirect('/app/')
+        // })
+    }
+    else{
+        res.send('exist')
+    }
+})
+
+
 // ROTAS DO APP
 router.get('/app/' , (req , res)=>{
-    if(req.session.logado || res.cookie('logado')){
+    if(req.session.logado){
         const admin = req.session.admin;
         // puxa o 1 valor de admin que é um array de objetos
         const row = admin[0]
-        // status se torna online
-        row.users_status = true;
+        // // status se torna online
+        // row.users_status = true;
 
         // usuarios
         db.query("SELECT * FROM tbusers WHERE users_id != ?", [row.users_id], (err, result) => {
@@ -29,12 +51,13 @@ router.get('/app/' , (req , res)=>{
 
         //res.render('app', {admin: row, title: "Whatzipps"})
 
-    } else{
+    } 
+    else{
         res.redirect('/');
     }
 })
 router.get('/app/minha_conta', (req, res) => {
-    if(req.session.logado  || res.cookie('logado')){
+    if(req.session.logado  || res.cookie.logado){
         const admin = req.session.admin;
         // puxa o 1 valor de admin que é um array de objetos
         const row = admin[0]
@@ -91,10 +114,17 @@ router.post('/cadastrar', (req,res) => {
                         req.session.erros = erros
                         res.redirect('/cadastro');
                     }else {
-                        req.session.admin = await result;
-                        req.session.logado = 'logado';
-                        res.cookie("logado", result[0].users_id)
-                        await res.redirect('/app/')
+                        var admin = await result;
+
+                        db.query("UPDATE tbusers SET users_status = ? LIMIT 1;",
+                            [admin[0].users_id], (err) => {
+                                if(err) res.redirect('/')
+
+                                req.session.admin = admin
+                                req.session.logado = 'logado';
+                                res.cookie("logado", admin[0].users_id, {maxAge: 600000, httpOnly: false})
+                                res.redirect('/app/')
+                            })
                     }
                 })
             }
@@ -130,10 +160,17 @@ router.post('/logar', (req, res) => {
                 req.session.erros = erros
                 res.redirect('/login');
             }else {
-                req.session.admin = await result;
-                req.session.logado = 'logado';
-                res.cookie("logado", result[0].users_id)
-                await res.redirect('/app/')
+                var admin = await result;
+
+                db.query("UPDATE tbusers SET users_status = ? LIMIT 1;",
+                    [admin[0].users_id], (err) => {
+                        if(err) res.redirect('/')
+
+                        req.session.admin = admin
+                        req.session.logado = 'logado';
+                        res.cookie("logado", admin[0].users_id, {maxAge: 600000, httpOnly: false})
+                        res.redirect('/app/')
+                    })
             }
             
         })
@@ -205,7 +242,7 @@ router.post('/deletar/:id', (req, res) => {
 
 
 router.post('/sair', (req, res) => {
-    if (req.session.logado  || res.cookie('logado')) {
+    if (req.session.logado  || res.cookie.logado) {
         req.session.destroy(null);
         res.clearCookie();
         res.redirect('/login');

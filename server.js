@@ -5,6 +5,7 @@ const { engine } = require('express-handlebars')
 const cookieparser = require('cookie-parser');
 const path = require('path');
 const router = require('./routers/routers.js');
+// const db = require('config/db/Connect');
 
 const app = express();
 const http = require('http').createServer(app);
@@ -43,14 +44,24 @@ io.on("connection", (socket) => {
 // retorna as rotas de ./routers/routers.js
 app.use('/', router);
 
-router.get('/' , (req , res)=>{
-    if(req.session.logado || res.cookie('logado'))
-        res.redirect('/app/')
+// router.get('/' , (req , res)=>{
+//     if(req.session.logado){
+//         res.redirect('/app/')
+//     }
+//     else if(res.cookie.logado){
+//         db.query("SELECT * FROM tbusers WHERE users_id = ? LIMIT 1", [res.cookie.logado], async (err, result) => {
+//             if(err) res.redirect('/');
+
+//             req.session.admin = await result;
+//             req.session.logado = 'logado';
+//             res.redirect('/app/')
+//         })
+//     }
         
-    res.sendFile(__dirname+'/index.html')
-})
+//     res.sendFile(__dirname+'/index.html')
+// })
 router.get('/login', (req, res) => {
-    if(req.session.logado || res.cookie('logado'))
+    if(req.session.logado || res.cookie.logado)
         res.redirect('/app/')
 
     if(req.session.erros){
@@ -60,7 +71,7 @@ router.get('/login', (req, res) => {
     res.render('login')
 })
 router.get('/cadastro', (req, res) => {
-    if(req.session.logado || res.cookie('logado'))
+    if(req.session.logado || res.cookie.logado)
         res.redirect('/app/')
 
     if(req.session.erros){
@@ -70,7 +81,7 @@ router.get('/cadastro', (req, res) => {
     res.render('cadastro')
 })
 router.get('*' , (req , res)=>{
-    if(req.session.logado || res.cookie('logado'))
+    if(req.session.logado || res.cookie.logado)
         res.redirect('/app/')
 
     res.sendFile(path.join(__dirname, '/views', '/404.html'))
