@@ -98,7 +98,6 @@
     var input_msg = document.querySelector('#txtMsg');
     //var btn_env_msg = document.querySelector('#btn_env_msg');
     var div_msg = document.querySelector('.mensagens');
-    var div = document.createElement('div');
 
     // CASO O EMAIL DA MENSAGEM SEJÁ DIFERENTE DO MEU : RECEBERA A CLASSE YOUR_MSG
     //div.classList('your_msg');
@@ -106,11 +105,11 @@
     const socket = io()
 
     socket.on('msgServer', (mensagem) =>{
-        msg = JSON.parse(mensagem);
 
+        msg = JSON.parse(mensagem);
+        var div = document.createElement('div');
         div.classList.add('msg');
         div.innerHTML = `<p>${msg.mensagem}</p>`
-
         div_msg.appendChild(div);
 
         console.log(msg.mensagem);

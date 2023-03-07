@@ -4,30 +4,29 @@ const bodyParser = require('body-parser');
 const db = require('../config/db/Connect');
 
 var path = require('path');
-const { type } = require('os');
+const { dirname } = require('path');
+
 
 router.use(bodyParser.urlencoded({extended:true}));
 
 // CONFIGURANDO ENDINE HANDLEBARS
 
-router.get('/' , (req , res)=>{
-    // if(req.session.logado){
-    //     res.redirect('/app/')
-    // }
-    if(res.cookie.logado === undefined){
-        res.send("dont exist")
-        // db.query("SELECT * FROM tbusers WHERE users_id = ? LIMIT 1", [res.cookie.logado], async (err, result) => {
-        //     if(err) res.redirect('/');
 
-        //     req.session.admin = await result;
-        //     console.log(req.session.admin)
-        //     req.session.logado = 'logado';
-        //     res.redirect('/app/')
-        // })
+router.get('/' , (req , res)=>{
+    if(req.session.logado){
+        res.redirect('/app/')
     }
-    else{
-        res.send('exist')
+    else if(req.cookies.logado){
+        db.query("SELECT * FROM tbusers WHERE users_id = ? LIMIT 1", [req.cookies.logado], async (err, result) => {
+            if(err) res.redirect('/');
+
+            req.session.admin = await result;
+            req.session.logado = 'logado';
+            res.redirect('/app/')
+        })
     }
+    else   
+        res.sendFile(path.join(__dirname, "../", "/index.html"))
 })
 
 
@@ -46,18 +45,24 @@ router.get('/app/' , (req , res)=>{
             console.log(result)
             res.render('app', {admin: row, users: result, title: "Whatzipps"})
         })
-
-
-
         //res.render('app', {admin: row, title: "Whatzipps"})
 
     } 
+    else if(req.cookies.logado){
+        db.query("SELECT * FROM tbusers WHERE users_id = ? LIMIT 1", [req.cookies.logado], async (err, result) => {
+            if(err) res.redirect('/');
+
+            req.session.admin = await result;
+            req.session.logado = 'logado';
+            //res.redirect('/app/')
+        })
+    }
     else{
         res.redirect('/');
     }
 })
 router.get('/app/minha_conta', (req, res) => {
-    if(req.session.logado  || res.cookie.logado){
+    if(req.session.logado){
         const admin = req.session.admin;
         // puxa o 1 valor de admin que é um array de objetos
         const row = admin[0]
@@ -65,7 +70,17 @@ router.get('/app/minha_conta', (req, res) => {
         res.render('conta', {admin: row, title: "Whatzipps"})
 
 
-    } else{
+    }
+    else if(req.cookies.logado){
+        db.query("SELECT * FROM tbusers WHERE users_id = ? LIMIT 1", [req.cookies.logado], async (err, result) => {
+            if(err) res.redirect('/');
+
+            req.session.admin = await result;
+            req.session.logado = 'logado';
+            //res.redirect('/app/')
+        })
+    }
+    else{
         res.redirect('/');
     }
 })
@@ -113,7 +128,13 @@ router.post('/cadastrar', (req,res) => {
                         erros.push({texto: 'Ops! Algo deu errado'});
                         req.session.erros = erros
                         res.redirect('/cadastro');
-                    }else {
+                    }
+                    else if(result == ''){
+                        erros.push({texto: 'Ops! Algo deu errado'});
+                        req.session.erros = erros
+                        res.redirect('/cadastro');
+                    }
+                    else {
                         var admin = await result;
 
                         db.query("UPDATE tbusers SET users_status = ? LIMIT 1;",
@@ -159,7 +180,13 @@ router.post('/logar', (req, res) => {
                 erros.push({texto: 'Ops! Algo deu errado'});
                 req.session.erros = erros
                 res.redirect('/login');
-            }else {
+            }
+            else if(result == ''){
+                erros.push({texto: 'Usuario não existe'});
+                req.session.erros = erros
+                res.redirect('/login');
+            }
+            else {
                 var admin = await result;
 
                 db.query("UPDATE tbusers SET users_status = ? LIMIT 1;",
@@ -234,7 +261,7 @@ router.post('/deletar/:id', (req, res) => {
             res.redirect('/app/minha_conta');
         }else {
             req.session.destroy(null);
-            res.clearCookie();
+            res.clearCookie("logado");
             res.redirect('/');
         }
     })
@@ -244,7 +271,7 @@ router.post('/deletar/:id', (req, res) => {
 router.post('/sair', (req, res) => {
     if (req.session.logado  || res.cookie.logado) {
         req.session.destroy(null);
-        res.clearCookie();
+        res.clearCookie("logado");
         res.redirect('/login');
     }else{
         res.redirect('/');
