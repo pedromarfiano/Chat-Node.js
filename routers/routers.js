@@ -152,8 +152,8 @@ router.post('/logar', (req, res) => {
     } else{
 
         // CONSULTA AO BANCO DE DADOS
-        db.query("SELECT * FROM tbusers WHERE users_name = ? or users_email = ? and users_pass = ? LIMIT 1;",
-        [req.body.User, req.body.User, req.body.Pass], async (err, result) => {
+        db.query("SELECT * FROM tbusers WHERE users_name = ? and users_pass = ?  or users_email = ? and users_pass = ? LIMIT 1;",
+        [req.body.User, req.body.Pass, req.body.User, req.body.Pass], async (err, result) => {
 
             if(err){
                 erros.push({texto: 'Ops! Algo deu errado'});
