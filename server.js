@@ -29,13 +29,24 @@ app.use(cookieparser());
 
 // SERVIDOR WS
 io.on("connection", (socket) => {
-    console.log(`novo socket ${socket.id}`); // ojIckSD2jqNzOqIrAGzL
-    socket.broadcast.emit('socketConnected', `socket ${socket.id} conectado`);
+
+    // AO CONECTAR
+    console.log(`novo socket ${socket.id}`);
+    socket.emit('dados', dados = {
+        email: session.admin[0].users_email
+    })
+    // MANDA PRO FRONTEND QUE UM SOCKET FOI CONECTADO
+    socket.broadcast.emit('socketEmit', `socket ${socket.id} conectado`);
 
     socket.on('msg', (msg) =>{
-        //console.log(msg)
+
         socket.emit('msgServer', msg);
         socket.broadcast.emit('msgServer', msg);
+    })
+
+    // AO SAIR
+    socket.on('disconnect', () => {
+        socket.emit('socketEmit', `socket desconectado ${socket.id}`)
     })
 });
 

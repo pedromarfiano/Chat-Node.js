@@ -98,13 +98,17 @@
     var input_msg = document.querySelector('#txtMsg');
     //var btn_env_msg = document.querySelector('#btn_env_msg');
     var div_msg = document.querySelector('.mensagens');
+    var email
 
     // CASO O EMAIL DA MENSAGEM SEJÁ DIFERENTE DO MEU : RECEBERA A CLASSE YOUR_MSG
-    //div.classList('your_msg');
 
     const socket = io()
 
-    socket.on('socketConnected', (msg) => {
+    socket.on('dados', (dados) =>{
+        email = dados.email
+    })
+
+    socket.on('socketEmit', (msg) => {
         var div = document.createElement('div');
         div.classList.add('msg');
         div.innerHTML = `<p>${msg}</p>`
