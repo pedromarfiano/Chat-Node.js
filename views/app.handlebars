@@ -104,15 +104,24 @@
 
     const socket = io()
 
-    socket.on('msgServer', (mensagem) =>{
-
-        msg = JSON.parse(mensagem);
+    socket.on('socketConnected', (msg) => {
         var div = document.createElement('div');
         div.classList.add('msg');
-        div.innerHTML = `<p>${msg.mensagem}</p>`
+        div.innerHTML = `<p>${msg}</p>`
         div_msg.appendChild(div);
 
-        console.log(msg.mensagem);
+        console.log(msg);
+    })
+
+    socket.on('msgServer', (msg) =>{
+
+        //msg = JSON.parse(mensagem);
+        var div = document.createElement('div');
+        div.classList.add('msg');
+        div.innerHTML = `<p>${msg}</p>`
+        div_msg.appendChild(div);
+
+        console.log(msg);
     })
 
     function env_mensage(){

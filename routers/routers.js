@@ -4,30 +4,9 @@ const bodyParser = require('body-parser');
 const db = require('../config/db/Connect');
 
 var path = require('path');
-const { dirname } = require('path');
 
 
 router.use(bodyParser.urlencoded({extended:true}));
-
-// CONFIGURANDO ENDINE HANDLEBARS
-
-
-router.get('/' , (req , res)=>{
-    if(req.session.logado){
-        res.redirect('/app/')
-    }
-    else if(req.cookies.logado){
-        db.query("SELECT * FROM tbusers WHERE users_id = ? LIMIT 1", [req.cookies.logado], async (err, result) => {
-            if(err) res.redirect('/');
-
-            req.session.admin = await result;
-            req.session.logado = 'logado';
-            res.redirect('/app/')
-        })
-    }
-    else   
-        res.sendFile(path.join(__dirname, "../", "/index.html"))
-})
 
 
 // ROTAS DO APP
@@ -42,7 +21,7 @@ router.get('/app/' , (req , res)=>{
         // usuarios
         db.query("SELECT * FROM tbusers WHERE users_id != ?", [row.users_id], (err, result) => {
             if(err) throw err;
-            console.log(result)
+            //console.log(result)
             res.render('app', {admin: row, users: result, title: "Whatzipps"})
         })
         //res.render('app', {admin: row, title: "Whatzipps"})
@@ -143,7 +122,7 @@ router.post('/cadastrar', (req,res) => {
 
                                 req.session.admin = admin
                                 req.session.logado = 'logado';
-                                res.cookie("logado", admin[0].users_id, {maxAge: 600000, httpOnly: false})
+                                //res.cookie("logado", admin[0].users_id, {maxAge: 600000, httpOnly: false})
                                 res.redirect('/app/')
                             })
                     }
@@ -195,7 +174,7 @@ router.post('/logar', (req, res) => {
 
                         req.session.admin = admin
                         req.session.logado = 'logado';
-                        res.cookie("logado", admin[0].users_id, {maxAge: 600000, httpOnly: false})
+                        //res.cookie("logado", admin[0].users_id, {maxAge: 600000, httpOnly: false})
                         res.redirect('/app/')
                     })
             }

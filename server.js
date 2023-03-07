@@ -29,13 +29,13 @@ app.use(cookieparser());
 
 // SERVIDOR WS
 io.on("connection", (socket) => {
-    //console.log(socket.id); // ojIckSD2jqNzOqIrAGzL
+    console.log(`novo socket ${socket.id}`); // ojIckSD2jqNzOqIrAGzL
+    socket.broadcast.emit('socketConnected', `socket ${socket.id} conectado`);
+
     socket.on('msg', (msg) =>{
-        socket.emit('msgServer', mensagem = JSON.stringify({
-            "remetente": "ana",
-            "destinatario": "jonas",
-            "mensagem": msg
-        }));
+        //console.log(msg)
+        socket.emit('msgServer', msg);
+        socket.broadcast.emit('msgServer', msg);
     })
 });
 
@@ -43,6 +43,14 @@ io.on("connection", (socket) => {
 
 // retorna as rotas de ./routers/routers.js
 app.use('/', router);
+
+router.get('/' , (req , res)=>{
+    if(req.session.logado || req.cookies.logado)
+        res.redirect('/app/')
+    
+    else   
+        res.sendFile(__dirname + "/index.html")
+})
 
 router.get('/login', (req, res) => {
     if(req.session.logado || req.cookies.logado)
@@ -74,6 +82,6 @@ router.get('*' , (req , res)=>{
 })
 
 // OPEN SERVER HTTP
-http.listen(8081, () =>{
+http.listen(8081,'192.168.8.86' , () =>{
     console.log('Server connect!')
 });
