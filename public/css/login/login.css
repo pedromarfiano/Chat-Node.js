@@ -1,4 +1,4 @@
-@import url("../main.css");
+@import url("../vars.css");
 
 /* @media (min-width: 320px) {smartphones, portrait iPhone, portrait 480x320 phones (Android) */
   body {
@@ -7,7 +7,7 @@
   
   .container_text {
     background-color: var(--active);
-    color: #FFFFFF;
+    color: var(--white1);
     height: 100vh;
     width: 100%;
     text-align: center;
@@ -15,7 +15,7 @@
   }
   
   .container_form {
-    background-color: #FFFFFF;
+    background-color: var(--white1);
     height: 100vh;
     width: 100%;
     display: flex;
@@ -26,7 +26,7 @@
     width: 70%;
     margin: auto;
     border-radius: 20px;
-    border: solid 1px #E1F1FF;
+    border: solid 1px var(--msg1);
     box-shadow:0px 15px 18px -10px #00000081;
   }
   form .alert_form {
@@ -40,18 +40,18 @@
     margin-bottom: 15px;
   }
   form label p {
-    color: #1174EB;
+    color: var(--active);
     font-weight: 700;
   }
   form input {
     margin: auto;
-    border: solid 1px #336b9c;
+    border: solid 1px var(--text2) /*#336b9c*/;
     margin-bottom: 20px;
     width: 90%;
     height: 35px;
   }
   form a {
-    color: #1174EB;
+    color: var(--active);
     text-decoration: none;
   }
   form div {
@@ -60,7 +60,7 @@
   }
   form nav {
     width: 100%;
-    border-top: solid 1px #E1F1FF;
+    border-top: solid 1px var(--msg1);
     padding: 7%;
   }
 
@@ -81,14 +81,14 @@
   }
   
   .container_text {
-    background-color: #1174EB;
-    color: #FFFFFF;
+    background-color: var(--active);
+    color: var(--white1);
     height: 100vh;
     width: 100%;
   }
   
   .container_form {
-    background-color: #FFFFFF;
+    background-color: var(--white1);
     height: 100vh;
     width: 100%;
     display: flex;
@@ -100,7 +100,7 @@
       width: 70%;
       margin: auto;
       border-radius: 20px;
-      border: solid 1px #E1F1FF;
+      border: solid 1px var(--msg1);
     }
     form .alert_form {
       padding: 7%;
@@ -113,18 +113,18 @@
       margin-bottom: 15px;
     }
     form label p {
-      color: #1174EB;
+      color: var(--active);
       font-weight: 700;
     }
     form input {
       margin: auto;
-      border: solid 1px #E1F1FF;
+      border: solid 1px var(--msg1);
       margin-bottom: 20px;
       width: 90%;
       height: 35px;
     }
     form a {
-      color: #1174EB;
+      color: var(--active);
       text-decoration: none;
     }
     form div {
@@ -133,7 +133,7 @@
     }
     form nav {
       width: 100%;
-      border-top: solid 1px #E1F1FF;
+      border-top: solid 1px var(--msg1);
       padding: 7%;
     }
   
@@ -154,14 +154,14 @@
   }
   
   .container_text {
-    background-color: #1174EB;
-    color: #FFFFFF;
+    background-color: var(--active);
+    color: var(--white1);
     height: 100vh;
     width: 100%;
   }
   
   .container_form {
-    background-color: #FFFFFF;
+    background-color: var(--white1);
     height: 100vh;
     width: 100%;
     display: flex;
@@ -175,7 +175,7 @@
         width: 70%;
         margin: auto;
         border-radius: 20px;
-        border: solid 1px #E1F1FF;
+        border: solid 1px var(--msg1);
       }
       form .alert_form {
         padding: 7%;
@@ -188,18 +188,18 @@
         margin-bottom: 15px;
       }
       form label p {
-        color: #1174EB;
+        color: var(--active);
         font-weight: 700;
       }
       form input {
         margin: auto;
-        border: solid 1px #E1F1FF;
+        border: solid 1px var(--msg1);
         margin-bottom: 20px;
         width: 90%;
         height: 35px;
       }
       form a {
-        color: #1174EB;
+        color: var(--active);
         text-decoration: none;
       }
       form div {
@@ -208,7 +208,7 @@
       }
       form nav {
         width: 100%;
-        border-top: solid 1px #E1F1FF;
+        border-top: solid 1px var(--msg1);
         padding: 7%;
       }
     
@@ -230,14 +230,14 @@
   }
   
   .container_text {
-    background-color: #1174EB;
-    color: #FFFFFF;
+    background-color: var(--active);
+    color: var(--white1);
     height: 100vh;
     width: 100%;
   }
   
   .container_form {
-    background-color: #FFFFFF;
+    background-color: var(--white1);
     height: 100vh;
     width: 100%;
     display: flex;
@@ -249,7 +249,7 @@
       width: 70%;
       margin: auto;
       border-radius: 20px;
-      border: solid 1px #E1F1FF;
+      border: solid 1px var(--msg1);
     }
     form .alert_form {
       padding: 7%;
@@ -262,18 +262,18 @@
       margin-bottom: 15px;
     }
     form label p {
-      color: #1174EB;
+      color: var(--active);
       font-weight: 700;
     }
     form input {
       margin: auto;
-      border: solid 1px #E1F1FF;
+      border: solid 1px var(--msg1);
       margin-bottom: 20px;
       width: 90%;
       height: 35px;
     }
     form a {
-      color: #1174EB;
+      color: var(--active);
       text-decoration: none;
     }
     form div {
@@ -282,7 +282,7 @@
     }
     form nav {
       width: 100%;
-      border-top: solid 1px #E1F1FF;
+      border-top: solid 1px var(--msg1);
       padding: 7%;
     }
   
@@ -304,14 +304,14 @@
   }
   
   .container_text {
-    background-color: #1174EB;
-    color: #FFFFFF;
+    background-color: var(--active);
+    color: var(--white1);
     height: 100vh;
     width: 100%;
   }
   
   .container_form {
-    background-color: #FFFFFF;
+    background-color: var(--white1);
     height: 100vh;
     width: 100%;
     display: flex;
@@ -323,7 +323,7 @@
       width: 70%;
       margin: auto;
       border-radius: 20px;
-      border: solid 1px #E1F1FF;
+      border: solid 1px var(--msg1);
     }
     form .alert_form {
       padding: 7%;
@@ -336,18 +336,18 @@
       margin-bottom: 15px;
     }
     form label p {
-      color: #1174EB;
+      color: var(--active);
       font-weight: 700;
     }
     form input {
       margin: auto;
-      border: solid 1px #E1F1FF;
+      border: solid 1px var(--msg1);
       margin-bottom: 20px;
       width: 90%;
       height: 35px;
     }
     form a {
-      color: #1174EB;
+      color: var(--active);
       text-decoration: none;
     }
     form div {
@@ -356,7 +356,7 @@
     }
     form nav {
       width: 100%;
-      border-top: solid 1px #E1F1FF;
+      border-top: solid 1px var(--msg1);
       padding: 7%;
     }
   
@@ -378,13 +378,13 @@
   
   .container_text {
     background-color: var(--active);
-    color: #FFFFFF;
+    color: var(--white1);
     height: 100vh;
     width: 100%;
   }
   
   .container_form {
-    background-color: #FFFFFF;
+    background-color: var(--white1);
     height: 100vh;
     width: 100%;
     display: flex;
@@ -394,7 +394,7 @@
     width: 70%;
     margin: auto;
     border-radius: 20px;
-    border: solid 1px #E1F1FF;
+    border: solid 1px var(--msg1);
   }
   form .alert_form {
     padding: 7%;
@@ -407,18 +407,18 @@
     margin-bottom: 15px;
   }
   form label p {
-    color: #1174EB;
+    color: var(--active);
     font-weight: 700;
   }
   form input {
     margin: auto;
-    border: solid 1px #E1F1FF;
+    border: solid 1px var(--msg1);
     margin-bottom: 20px;
     width: 90%;
     height: 35px;
   }
   form a {
-    color: #1174EB;
+    color: var(--active);
     text-decoration: none;
   }
   form div {
@@ -427,7 +427,7 @@
   }
   form nav {
     width: 100%;
-    border-top: solid 1px #E1F1FF;
+    border-top: solid 1px var(--msg1);
     padding: 7%;
   }
 
