@@ -4,12 +4,63 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="public/css/main.css">
+    <style>
+        :root {
+  --white1: #FFFFFF;
+  --white2: #F5F8FD;
+  --white3: #FFFFFF;
+
+  --active: #1174EB;
+  --cancel: #F96F61;
+
+  --title: #FFFFFF;
+  --text1: #111111;
+  --text2: #8797AF;
+
+  --msg1: #E1F1FF;
+  --msg2: #F5F8FD;
+}
+.darkmode:root {
+  --white1: #262E35;
+  --white2: #303841;
+  --white3: #37404A;
+
+  --active: #72C977;
+  --cancel: #F96F61;
+
+  --title: #FFFFFF;
+  --text1: #EFEFF7;
+  --text2: #8D96A0;
+
+  --msg1: #37404A;
+  --msg2: #4C5562;
+}
+
+body{
+  background-color: var(--active);
+}
+    </style>
     <title>Chat App</title>
 </head>
 <body>
     index:<br>
     <a href="/login">login</a>
     <a href="/cadastro">cadastro</a>
+    <button class="btn_theme">
+        Mode
+    </button>
 </body>
+    <script>
+        const btn = document.querySelector('.btn_theme');
+
+        btn.addEventListener('click', () => {
+            if(document.querySelector('html').classList.contains('darkmode')){
+                document.querySelector('html').classList.remove('darkmode');
+            }
+            else{
+                document.querySelector('html').classList.add('darkmode');
+
+            }
+        })
+    </script>
 </html>
