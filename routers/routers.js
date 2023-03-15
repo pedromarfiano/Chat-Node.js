@@ -51,10 +51,11 @@ router.get('/app/conversa/:id', (req, res) => {
         // usuarios
         db.query("SELECT * FROM tbusers WHERE users_id != ?", [row.users_id], (err, result) => {
             if(err) throw err;
+            let result1 = result;
             //console.log(result)
             db.query("SELECT * FROM tbusers WHERE users_id = ?", [req.params.id], (err, result) => {
                 if(err) throw err;
-                res.render('app', {admin: row, users: result, title: "Whatzipps", conversa: result[0]})
+                res.render('app', {admin: row, users: result1, title: "Whatzipps", conversa: result[0]})
             })
             
         })
@@ -82,15 +83,12 @@ router.get('/app/contato/:id', (req, res) => {
         // row.users_status = true;
 
         // usuarios
-        db.query("SELECT * FROM tbusers WHERE users_id != ?", [row.users_id], (err, result) => {
+
+        db.query("SELECT * FROM tbusers WHERE users_id = ?", [req.params.id], (err, result) => {
             if(err) throw err;
-            //console.log(result)
-            db.query("SELECT * FROM tbusers WHERE users_id = ?", [req.params.id], (err, result) => {
-                if(err) throw err;
-                res.render('contato', {title: "Whatzipps", conversa: result[0]})
-            })
-            
+            res.render('contato', {title: "Whatzipps", contato: result[0]})
         })
+            
 
     } 
     else if(req.cookies.logado){

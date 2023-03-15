@@ -97,6 +97,7 @@
     </main> 
 </body>
 
+{{#if conversa}}
 <script src="/socket.io/socket.io.js"></script>
 <script>
     var input_msg = document.querySelector('#txtMsg');
@@ -139,3 +140,4 @@
         }
     }
 </script>
+{{/if}}
