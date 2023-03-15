@@ -73,6 +73,39 @@ router.get('/app/conversa/:id', (req, res) => {
         res.redirect('/');
     }
 })
+router.get('/app/contato/:id', (req, res) => {
+    if(req.session.logado){
+        const admin = req.session.admin;
+        // puxa o 1 valor de admin que é um array de objetos
+        const row = admin[0]
+        // // status se torna online
+        // row.users_status = true;
+
+        // usuarios
+        db.query("SELECT * FROM tbusers WHERE users_id != ?", [row.users_id], (err, result) => {
+            if(err) throw err;
+            //console.log(result)
+            db.query("SELECT * FROM tbusers WHERE users_id = ?", [req.params.id], (err, result) => {
+                if(err) throw err;
+                res.render('contato', {title: "Whatzipps", conversa: result[0]})
+            })
+            
+        })
+
+    } 
+    else if(req.cookies.logado){
+        db.query("SELECT * FROM tbusers WHERE users_id = ? LIMIT 1", [req.cookies.logado], async (err, result) => {
+            if(err) res.redirect('/');
+
+            req.session.admin = await result;
+            req.session.logado = 'logado';
+            res.redirect('/app/')
+        })
+    }
+    else{
+        res.redirect('/');
+    }
+})
 router.get('/app/minha_conta', (req, res) => {
     if(req.session.logado){
         const admin = req.session.admin;
