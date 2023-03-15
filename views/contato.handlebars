@@ -1,0 +1,38 @@
+<head>
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="" alt="logo"> <h1>Whatzip</h1>
+        </div>
+        <nav>
+            <ul>
+                <li>
+                    <a href="/app/"><i class="fa-solid fa-user"></i></a>
+                </li>
+                <li>
+                    <a href="/app/usuarios"><i class="fa-solid fa-address-book"></i></a>
+                </li>
+                <li>
+                    <a href="/app/minha_conta"><i class="fa-solid fa-gear"></i></a>
+                </li>
+            </ul>
+        </nav>
+        <div>
+            <form action="/sair" method="post">
+                <button type="submit"><i class="fa-solid fa-power-off"></i></button>
+            </form>
+        </div>
+    </header>
+    <!--SESSÃO ONDE CONTEM AS INFORMAÇÕES QUE IRÃO MUDAR-->
+    <section>
+        <h1>Whatzipps</h1>
+
+        <img src="{{contato.users_img}}" alt="imagem do contato">
+        <h3>{{contato.users_name}}</h3>
+    </section>
+    <main>
+        <img src="" alt="">
+    </main>
+</body>

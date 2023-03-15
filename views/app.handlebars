@@ -51,7 +51,7 @@
                 </div>
             </div> --}}
             {{#each users}}
-                <div class="contato">
+                <a href="/app/conversa/{{users_id}}" class="contato">
                     <div class="msg_img">
                         <img src="{{users_img}}" id="img">
                     </div>
@@ -62,36 +62,38 @@
                     <div class="msg_hora">
                         <p>10:00</p>
                     </div>
-                </div>
+                </a>
             {{/each}}
         </div>
     </section>
                         
     <main>
-        <div class="contato_ativo">
-            <div class="contato_img">
-                <img src="/src/img/transferir.jpg" id="img">
+        {{#if conversa}}
+            <div class="contato_ativo">
+                <div class="contato_img">
+                    <img src="{{conversa.users_img}}" id="img">
+                </div>
+                <div class="contato_text">
+                    <h3>{{conversa.users_name}}</h3>
+                    <p>escrevendo</p>
+                </div>
+                <div>
+                    <a href="/app/contato/{{conversa.users_id}}"><p>informaçõs do contato</p></a>
+                </div>
             </div>
-            <div class="contato_text">
-                <h3>nome</h3>
-                <p>escrevendo</p>
+            <div class="mensagens">
+                <!--<div class="my_msg msg"><p>oi</p></div>
+                <div class="your_msg msg"><p>oi</p></div>-->
             </div>
-            <div>
-                <a href="#"><p>informaçõs do contato</p></a>
-            </div>
-        </div>
-            
 
-        <div class="mensagens">
-            <!--<div class="my_msg msg"><p>oi</p></div>
-            <div class="your_msg msg"><p>oi</p></div>-->
-        </div>
+            <div class="contato_input">
+                <input type="text" id="txtMsg" placeholder="Ola..."/>
+                <button id="btn_env_msg" onclick="env_mensage()"><i>mandar</i></button>
+            </div>
 
-        <div class="contato_input">
-            <input type="text" id="txtMsg" placeholder="Ola..."/>
-            <button id="btn_env_msg" onclick="env_mensage()"><i>mandar</i></button>
-        </div>
-                
+        {{else}}   
+            <img src="" alt=""> 
+        {{/if}}        
     </main> 
 </body>
 
