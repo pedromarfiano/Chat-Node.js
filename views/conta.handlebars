@@ -1,3 +1,6 @@
+<head>
+    <link rel="stylesheet" href="/css/main.css">
+</head>
 <body>
     <header>
         <div class="logo">
@@ -6,10 +9,10 @@
         <nav>
             <ul>
                 <li>
-                    <a href="#"><i class="fa-solid fa-user"></i></a>
+                    <a href="/app/"><i class="fa-solid fa-user"></i></a>
                 </li>
                 <li>
-                    <a href="#"><i class="fa-solid fa-address-book"></i></a>
+                    <a href="/app/usuarios"><i class="fa-solid fa-address-book"></i></a>
                 </li>
                 <li>
                     <a href="/app/minha_conta"><i class="fa-solid fa-gear"></i></a>
@@ -30,7 +33,6 @@
             <div class="alert alert-danger">{{texto}}</div>
             {{else}}
         {{/each}}
-        <a href="/app/">app</a>
         <form action="/alterar/{{admin.users_id}}" method="post">
             <label for="User"><p>Nome</p></label>
             <input type="User" name="User" id="" value="{{admin.users_name}}">
@@ -42,9 +44,6 @@
             <input type="password" name="Pass" id="" value="{{admin.users_pass}}">
 
             <button type="submit">alterar</button>
-        </form>
-        <form action="/sair" method="post">
-            <button type="submit">sair</button>
         </form>
         <form action="/deletar/{{admin.users_id}}" method="post">
             <button type="submit">deletar conta</button>

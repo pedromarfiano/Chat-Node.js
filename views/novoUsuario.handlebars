@@ -1,3 +1,6 @@
+<head>
+    <link rel="stylesheet" href="/css/main.css">
+</head>
 <body>
     <header>
         <div class="logo">
@@ -6,10 +9,10 @@
         <nav>
             <ul>
                 <li>
-                    <a href="#"><i class="fa-solid fa-user"></i></a>
+                    <a href="/app/"><i class="fa-solid fa-user"></i></a>
                 </li>
                 <li>
-                    <a href="#"><i class="fa-solid fa-address-book"></i></a>
+                    <a href="/app/usuarios"><i class="fa-solid fa-address-book"></i></a>
                 </li>
                 <li>
                     <a href="/app/minha_conta"><i class="fa-solid fa-gear"></i></a>
@@ -26,12 +29,11 @@
     <section>
         <h1>Whatzipps</h1>
 
-        <form action="/search_users" method="post" class="search_bar">
-
-            <input type="text" id="txtBusca" placeholder="Buscar..."/>
+        <form action="/app/usuarios" method="get" class="search_bar">
+            <input type="text" name="search" id="txtBusca" placeholder="Buscar...">
             <button type="submit"><i>icone de busca</i></button>
-            
         </form>
+        
 
         <div class="contatos">
             {{#each users}}
@@ -46,7 +48,7 @@
             {{/each}}
         </div>
     </section>
-    <main>
+    <section>
         <img src="" alt="">
-    </main>
+    </section>
 </body>

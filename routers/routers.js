@@ -33,7 +33,7 @@ router.get('/app/' , (req , res)=>{
 
             req.session.admin = await result;
             req.session.logado = 'logado';
-            //res.redirect('/app/')
+            res.redirect('/app/')
         })
     }
     else{
@@ -56,7 +56,35 @@ router.get('/app/minha_conta', (req, res) => {
 
             req.session.admin = await result;
             req.session.logado = 'logado';
-            //res.redirect('/app/')
+            res.redirect('/app/minha_conta')
+        })
+    }
+    else{
+        res.redirect('/');
+    }
+})
+router.get('/app/usuarios', (req, res) => {
+    if(req.session.logado){
+        const admin = req.session.admin;
+        // puxa o 1 valor de admin que é um array de objetos
+        const row = admin[0]
+        // mostra no termina o valor do id
+
+        db.query("SELECT * FROM tbusers WHERE users_name LIKE ? and users_email LIKE ? and users_id != ?", ["%"+req.query.search+"%" , "%"+req.query.search+"%", row.users_id], (err, result) => {
+            if(err) throw err;
+            console.log(result)
+            res.render('novoUsuario', {admin: row, users: result, title: "Whatzipps"})
+        })
+
+        //res.render('novoUsuario', {admin: row, title: "Whatzipps"})
+    }
+    else if(req.cookies.logado){
+        db.query("SELECT * FROM tbusers WHERE users_id = ? LIMIT 1", [req.cookies.logado], async (err, result) => {
+            if(err) res.redirect('/');
+
+            req.session.admin = await result;
+            req.session.logado = 'logado';
+            res.redirect('/app/usuarios')
         })
     }
     else{
