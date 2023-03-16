@@ -134,7 +134,7 @@ router.get('/app/usuarios', (req, res) => {
         const row = admin[0]
         // mostra no termina o valor do id
 
-        db.query("SELECT * FROM tbusers WHERE users_name LIKE ? and users_email LIKE ? and users_id != ?", ["%"+req.query.search+"%" , "%"+req.query.search+"%", row.users_id], (err, result) => {
+        db.query("SELECT * FROM tbusers WHERE users_name LIKE ? OR users_email LIKE ? AND users_id != ?", ["%"+req.query.search+"%" , "%"+req.query.search+"%", row.users_id], (err, result) => {
             if(err) throw err;
             console.log(result)
             res.render('novoUsuario', {admin: row, users: result, title: "Whatzipps"})
