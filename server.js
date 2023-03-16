@@ -38,7 +38,8 @@ io.on("connection", (socket) => {
     // MANDA PRO FRONTEND QUE UM SOCKET FOI CONECTADO
     socket.broadcast.emit('socketEmit', `socket ${socket.id} conectado`);
 
-    socket.on('msg', (msg) =>{
+    socket.on('msg', (msg, email) =>{
+        console.log(`email: ${email}, mensagem: ${msg}`)
 
         socket.emit('msgServer', msg);
         socket.broadcast.emit('msgServer', msg);

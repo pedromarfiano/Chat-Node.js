@@ -114,8 +114,8 @@
 
     const socket = io()
 
-    socket.on('dados', (email) =>{
-        console.log(email)
+    socket.on('dados', (eml) =>{
+        email = eml;
     })
 
     socket.on('socketEmit', (msg) => {
@@ -129,7 +129,6 @@
 
     socket.on('msgServer', (msg) =>{
 
-        //msg = JSON.parse(mensagem);
         var div = document.createElement('div');
         div.classList.add('msg');
         div.innerHTML = `<p>${msg}</p>`
@@ -140,7 +139,10 @@
 
     function env_mensage(){
         if(input_msg.value != 0){
-            socket.emit('msg', input_msg.value);
+            socket.emit('msg', 
+                input_msg.value,
+                email
+            );
             input_msg.value = null;
         }
     }

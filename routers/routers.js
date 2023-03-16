@@ -54,7 +54,6 @@ router.get('/app/conversa/:id', (req, res) => {
                 let result2 = result;
                 db.query("SELECT * FROM tbmessages WHERE msg_remetente_id = ? AND msg_destinatario_id = ? OR msg_remetente_id = ? AND msg_destinatario_id = ? ORDER BY msg_id", [row.users_id, req.params.id, req.params.id, row.users_id], (err, result) => {
                     if(err) throw err;
-                    console.log(result);
                     res.render('app', {admin: row, users: result1, title: "Whatzipps", conversa: result2[0], message: result})
                 })
             })
