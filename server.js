@@ -32,9 +32,9 @@ io.on("connection", (socket) => {
 
     // AO CONECTAR
     console.log(`novo socket ${socket.id}`);
-    // socket.emit('dados', JSON.parse({
-    //     "email": session.admin[0].users_email
-    // }))
+    socket.emit('dados', {
+        email: 'ana@gmail.com'
+    })
     // MANDA PRO FRONTEND QUE UM SOCKET FOI CONECTADO
     socket.broadcast.emit('socketEmit', `socket ${socket.id} conectado`);
 

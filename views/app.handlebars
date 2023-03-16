@@ -88,7 +88,7 @@
 
             <div class="contato_input">
                 <input type="text" id="txtMsg" placeholder="Ola..."/>
-                <button id="btn_env_msg" onclick="env_mensage()"><i>mandar</i></button>
+                <button id="btn_env_msg"><i>mandar</i></button>
             </div>
 
         {{else}}   
@@ -101,7 +101,7 @@
 <script src="/socket.io/socket.io.js"></script>
 <script>
     var input_msg = document.querySelector('#txtMsg');
-    //var btn_env_msg = document.querySelector('#btn_env_msg');
+    var btn_msg = document.querySelector('#btn_env_msg');
     var div_msg = document.querySelector('.mensagens');
     var email
 
@@ -110,7 +110,7 @@
     const socket = io()
 
     socket.on('dados', (dados) =>{
-        email = dados.email
+        
     })
 
     socket.on('socketEmit', (msg) => {
@@ -139,5 +139,12 @@
             input_msg.value = null;
         }
     }
+    document.addEventListener("keydown", (event) => {
+    if (event.isComposing || event.keyCode === 13)
+        env_mensage();
+    });
+    btn_msg.addEventListener("click", (event) => {
+        env_mensage();
+    });
 </script>
 {{/if}}
