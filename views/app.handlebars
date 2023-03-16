@@ -82,6 +82,11 @@
                 </div>
             </div>
             <div class="mensagens">
+                {{!-- {{#if msg}} --}}
+                    {{#each message}}
+                        <div class="your_msg msg"><p>{{msg}}</p></div>
+                    {{/each}}
+                {{!-- {{/if}} --}}
                 <!--<div class="my_msg msg"><p>oi</p></div>
                 <div class="your_msg msg"><p>oi</p></div>-->
             </div>
@@ -109,8 +114,8 @@
 
     const socket = io()
 
-    socket.on('dados', (dados) =>{
-        
+    socket.on('dados', (email) =>{
+        console.log(email)
     })
 
     socket.on('socketEmit', (msg) => {

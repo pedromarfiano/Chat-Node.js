@@ -43,19 +43,20 @@ router.get('/app/' , (req , res)=>{
 router.get('/app/conversa/:id', (req, res) => {
     if(req.session.logado){
         const admin = req.session.admin;
-        // puxa o 1 valor de admin que é um array de objetos
         const row = admin[0]
-        // // status se torna online
-        // row.users_status = true;
 
-        // usuarios
         db.query("SELECT * FROM tbusers WHERE users_id != ?", [row.users_id], (err, result) => {
             if(err) throw err;
             let result1 = result;
             //console.log(result)
             db.query("SELECT * FROM tbusers WHERE users_id = ?", [req.params.id], (err, result) => {
                 if(err) throw err;
-                res.render('app', {admin: row, users: result1, title: "Whatzipps", conversa: result[0]})
+                let result2 = result;
+                db.query("SELECT * FROM tbmessages WHERE msg_remetente_id = ? AND msg_destinatario_id = ? OR msg_remetente_id = ? AND msg_destinatario_id = ? ORDER BY msg_id", [row.users_id, req.params.id, req.params.id, row.users_id], (err, result) => {
+                    if(err) throw err;
+                    console.log(result);
+                    res.render('app', {admin: row, users: result1, title: "Whatzipps", conversa: result2[0], message: result})
+                })
             })
             
         })
@@ -77,12 +78,7 @@ router.get('/app/conversa/:id', (req, res) => {
 router.get('/app/contato/:id', (req, res) => {
     if(req.session.logado){
         const admin = req.session.admin;
-        // puxa o 1 valor de admin que é um array de objetos
         const row = admin[0]
-        // // status se torna online
-        // row.users_status = true;
-
-        // usuarios
 
         db.query("SELECT * FROM tbusers WHERE users_id = ?", [req.params.id], (err, result) => {
             if(err) throw err;
