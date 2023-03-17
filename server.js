@@ -5,27 +5,12 @@ const { engine } = require('express-handlebars')
 const cookieparser = require('cookie-parser');
 const path = require('path');
 const router = require('./routers/routers.js');
+const { Server } = require('socket.io');
 // const db = require('config/db/Connect');
 
 const app = express();
 const http = require('http').createServer(app);
-const io = require('socket.io')(http);
-
-app.use(session({
-    secret: "123123123",
-    saveUninitialized: false,
-    resave: false
-}))
-
-// ENGINE HTML
-
-app.engine('handlebars', engine());
-app.set('view engine', 'handlebars');
-app.use(express.static('./public'))
-
-// COOKIES
-app.use(cookieparser());
-
+const io = new Server(http);
 
 // SERVIDOR WS
 io.on("connection", (socket) => {
@@ -50,6 +35,21 @@ io.on("connection", (socket) => {
         socket.emit('socketEmit', `socket desconectado ${socket.id}`)
     })
 });
+
+app.use(session({
+    secret: "123123123",
+    saveUninitialized: false,
+    resave: false
+}))
+
+// ENGINE HTML
+
+app.engine('handlebars', engine());
+app.set('view engine', 'handlebars');
+app.use(express.static('./public'))
+
+// COOKIES
+app.use(cookieparser());
 
 // ROTAS
 
@@ -97,3 +97,5 @@ router.get('*' , (req , res)=>{
 http.listen(8081, () =>{
     console.log('Server connect!')
 });
+
+module.exports = {io}

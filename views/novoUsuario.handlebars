@@ -37,18 +37,18 @@
 
         <div class="contatos">
             {{#each users}}
-                <div class="contato">
+                <a href="/app/conversa/{{users_id}}" class="contato">
                     <div class="msg_img">
                         <img src="{{users_img}}" id="img">
                     </div>
                     <div class="msg_text">
                         <h3>{{users_name}}</h3>
                     </div>
-                </div>
+                </a>
             {{/each}}
         </div>
     </section>
-    <section>
+    <main>
         <img src="" alt="">
-    </section>
+    </main>
 </body>
