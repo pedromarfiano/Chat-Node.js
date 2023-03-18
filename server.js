@@ -36,7 +36,7 @@ router.get('/' , (req , res)=>{
         res.redirect('/app/')
     
     else   
-        res.sendFile(__dirname + "/index.html")
+        res.render('index');
 })
 
 router.get('/login', (req, res) => {
@@ -63,7 +63,7 @@ router.get('*' , (req , res)=>{
     if(req.session.logado || req.cookies.logado)
         res.redirect('/app/')
 
-    res.sendFile(path.join(__dirname, '/views', '/404.html'))
+    res.render('404', {title: "404"});
     res.status(404)
     
 })

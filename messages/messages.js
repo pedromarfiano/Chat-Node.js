@@ -7,35 +7,44 @@ const http = require('http').createServer(app);
 const io = new Server(http);
 
 //SERVIDOR WS
-io.on("connection", (socket) => {
+// io.on("connection", (socket) => {
 
-    // AO CONECTAR
-    console.log(`novo socket ${socket.id}`);
-    
-    socket.emit('dados', 
-        email = 'ana@gmail.com'
-    )
-    // MANDA PRO FRONTEND QUE UM SOCKET FOI CONECTADO
-    socket.broadcast.emit('socketEmit', `socket ${socket.id} conectado`);
+//     // AO CONECTAR
+//     console.log(`novo socket ${socket.id}`);
+//     // MANDA PRO FRONTEND QUE UM SOCKET FOI CONECTADO
+//     socket.broadcast.emit('socketEmit', `socket ${socket.id} conectado`);
+//     // AO SAIR
+//     socket.on('disconnect', () => {
+//         socket.emit('socketEmit', `socket desconectado ${socket.id}`)
+//     })
 
-    socket.on('msg', (msg, email) =>{
-        console.log(`email: ${email}, mensagem: ${msg}`)
-
-        socket.emit('msgServer', msg);
-        socket.broadcast.emit('msgServer', msg);
-    })
-
-    // AO SAIR
-    socket.on('disconnect', () => {
-        socket.emit('socketEmit', `socket desconectado ${socket.id}`)
-    })
-});
+// });
 
 //ROTAS DE BATE-PAPO
 router.get('/app/conversa/:id', (req, res) => {
     if(req.session.logado){
         const admin = req.session.admin;
         const row = admin[0]
+
+        io.on("connection", (socket) => {
+
+            socket.emit('dados', 
+                id = row.users_id
+            )
+            socket.on('msg', (msg, id) =>{
+                console.log(`email: ${id}, mensagem: ${msg}`)
+                
+                if(id == row.users_id){
+                    db.query("INSERT INTO tbmessages(msg_remetente_id, msg_destinatario_id, msg) VALUES(?, ?, ?)", [row.users_id, req.params.id, msg], (err, result) =>{
+                        if(err) throw err;
+    
+                        socket.emit('msgServer', msg);
+                    })
+                    //socket.emit('msgServer', msg) //,classe = "my_msg");
+                }
+            })
+
+        })
 
         db.query("SELECT * FROM tbusers WHERE users_id != ?", [row.users_id], (err, result) => {
             if(err) throw err;

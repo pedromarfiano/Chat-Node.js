@@ -108,14 +108,15 @@
     var input_msg = document.querySelector('#txtMsg');
     var btn_msg = document.querySelector('#btn_env_msg');
     var div_msg = document.querySelector('.mensagens');
-    var email
+    var id
 
     // CASO O EMAIL DA MENSAGEM SEJÁ DIFERENTE DO MEU : RECEBERA A CLASSE YOUR_MSG
 
     const socket = io()
 
-    socket.on('dados', (eml) =>{
-        email = eml;
+    socket.on('dados', (U_id) =>{
+        id =U_id;
+        console.log(id);
     })
 
     socket.on('socketEmit', (msg) => {
@@ -141,7 +142,7 @@
         if(input_msg.value != 0){
             socket.emit('msg', 
                 input_msg.value,
-                email
+                id
             );
             input_msg.value = null;
         }
