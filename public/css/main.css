@@ -8,6 +8,7 @@
 @import url(./width-801.css);
 @import url(./vars.css);
 @import url(./theme.css);
+@import url(alertas.css);
 * {
   margin: 0%;
   padding: 0%;

@@ -1,5 +1,9 @@
 .btn_theme{
-    background-color: var(--white1);
+    position: absolute;
+    right: 1%;
+    top: 1%;
+
+    background-color: var(--active);
     width: 40px;
     height: 40px;
     border-radius: 50%;
