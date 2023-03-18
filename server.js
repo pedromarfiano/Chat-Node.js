@@ -1,40 +1,15 @@
 // CARREGANDO MODULOS
-const express = require('express')
+// const express = require('express');
 const session = require('express-session');
 const { engine } = require('express-handlebars')
 const cookieparser = require('cookie-parser');
 const path = require('path');
-const router = require('./routers/routers.js');
-const { Server } = require('socket.io');
 // const db = require('config/db/Connect');
+const { http, express, app, io, router} = require('./messages/messages.js')
 
-const app = express();
-const http = require('http').createServer(app);
-const io = new Server(http);
-
-// SERVIDOR WS
-io.on("connection", (socket) => {
-
-    // AO CONECTAR
-    console.log(`novo socket ${socket.id}`);
-    socket.emit('dados', 
-        email = 'ana@gmail.com'
-    )
-    // MANDA PRO FRONTEND QUE UM SOCKET FOI CONECTADO
-    socket.broadcast.emit('socketEmit', `socket ${socket.id} conectado`);
-
-    socket.on('msg', (msg, email) =>{
-        console.log(`email: ${email}, mensagem: ${msg}`)
-
-        socket.emit('msgServer', msg);
-        socket.broadcast.emit('msgServer', msg);
-    })
-
-    // AO SAIR
-    socket.on('disconnect', () => {
-        socket.emit('socketEmit', `socket desconectado ${socket.id}`)
-    })
-});
+// const app = express();
+// const http = require('http').createServer(app);
+// const io = new Server(http);
 
 app.use(session({
     secret: "123123123",
@@ -97,5 +72,3 @@ router.get('*' , (req , res)=>{
 http.listen(8081, () =>{
     console.log('Server connect!')
 });
-
-module.exports = {io}

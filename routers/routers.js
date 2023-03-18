@@ -40,40 +40,40 @@ router.get('/app/' , (req , res)=>{
         res.redirect('/');
     }
 })
-router.get('/app/conversa/:id', (req, res) => {
-    if(req.session.logado){
-        const admin = req.session.admin;
-        const row = admin[0]
+// router.get('/app/conversa/:id', (req, res) => {
+//     if(req.session.logado){
+//         const admin = req.session.admin;
+//         const row = admin[0]
 
-        db.query("SELECT * FROM tbusers WHERE users_id != ?", [row.users_id], (err, result) => {
-            if(err) throw err;
-            let result1 = result;
-            //console.log(result)
-            db.query("SELECT * FROM tbusers WHERE users_id = ?", [req.params.id], (err, result) => {
-                if(err) throw err;
-                let result2 = result;
-                db.query("SELECT * FROM tbmessages WHERE msg_remetente_id = ? AND msg_destinatario_id = ? OR msg_remetente_id = ? AND msg_destinatario_id = ? ORDER BY msg_id", [row.users_id, req.params.id, req.params.id, row.users_id], (err, result) => {
-                    if(err) throw err;
-                    res.render('app', {admin: row, users: result1, title: "Whatzipps", conversa: result2[0], message: result})
-                })
-            })
+//         db.query("SELECT * FROM tbusers WHERE users_id != ?", [row.users_id], (err, result) => {
+//             if(err) throw err;
+//             let result1 = result;
+//             //console.log(result)
+//             db.query("SELECT * FROM tbusers WHERE users_id = ?", [req.params.id], (err, result) => {
+//                 if(err) throw err;
+//                 let result2 = result;
+//                 db.query("SELECT * FROM tbmessages WHERE msg_remetente_id = ? AND msg_destinatario_id = ? OR msg_remetente_id = ? AND msg_destinatario_id = ? ORDER BY msg_id", [row.users_id, req.params.id, req.params.id, row.users_id], (err, result) => {
+//                     if(err) throw err;
+//                     res.render('app', {admin: row, users: result1, title: "Whatzipps", conversa: result2[0], message: result})
+//                 })
+//             })
             
-        })
+//         })
 
-    } 
-    else if(req.cookies.logado){
-        db.query("SELECT * FROM tbusers WHERE users_id = ? LIMIT 1", [req.cookies.logado], async (err, result) => {
-            if(err) res.redirect('/');
+//     } 
+//     else if(req.cookies.logado){
+//         db.query("SELECT * FROM tbusers WHERE users_id = ? LIMIT 1", [req.cookies.logado], async (err, result) => {
+//             if(err) res.redirect('/');
 
-            req.session.admin = await result;
-            req.session.logado = 'logado';
-            res.redirect('/app/')
-        })
-    }
-    else{
-        res.redirect('/');
-    }
-})
+//             req.session.admin = await result;
+//             req.session.logado = 'logado';
+//             res.redirect('/app/')
+//         })
+//     }
+//     else{
+//         res.redirect('/');
+//     }
+// })
 router.get('/app/contato/:id', (req, res) => {
     if(req.session.logado){
         const admin = req.session.admin;
@@ -344,4 +344,4 @@ router.post('/sair', (req, res) => {
     }
 })
 
-module.exports  = router
+module.exports  = {router, db}
