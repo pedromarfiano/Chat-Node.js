@@ -34,7 +34,6 @@ app.use('/', router);
 router.get('/' , (req , res)=>{
     if(req.session.logado || req.cookies.logado)
         res.redirect('/app/')
-    
     else   
         res.render('index');
 })
@@ -43,32 +42,34 @@ router.get('/login', (req, res) => {
     if(req.session.logado || req.cookies.logado)
         res.redirect('/app/')
 
-    if(req.session.erros){
+    else if(req.session.erros){
         res.render('login', {erros: req.session.erros, title: "Login"})
     } 
-    
-    res.render('login')
+    else
+        res.render('login')
 })
 router.get('/cadastro', (req, res) => {
     if(req.session.logado || req.cookies.logado)
         res.redirect('/app/')
 
-    if(req.session.erros){
+    else if(req.session.erros){
         res.render('cadastro', {erros: req.session.erros, title: "Cadastro"})
     } 
-
-    res.render('cadastro')
+    else
+        res.render('cadastro')
 })
 router.get('*' , (req , res)=>{
     if(req.session.logado || req.cookies.logado)
         res.redirect('/app/')
 
-    res.render('404', {title: "404"});
-    res.status(404)
+    else {
+        res.render('404', {title: "404"});
+        res.status(404)
+    }
     
 })
 
 // OPEN SERVER HTTP
 http.listen(8081, () =>{
-    console.log('Server connect!')
+    console.log('Server connect! http://localhost:8081/')
 });

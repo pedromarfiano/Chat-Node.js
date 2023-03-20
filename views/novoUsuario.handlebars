@@ -36,16 +36,18 @@
         
 
         <div class="contatos">
-            {{#each users}}
-                <a href="/app/conversa/{{users_id}}" class="contato">
-                    <div class="msg_img">
-                        <img src="{{users_img}}" id="img">
-                    </div>
-                    <div class="msg_text">
-                        <h3>{{users_name}}</h3>
-                    </div>
-                </a>
-            {{/each}}
+            {{#if users}}
+                {{#each users}}
+                    <a href="/app/conversa/{{users_id}}" class="contato">
+                        <div class="msg_img">
+                            <img src="{{users_img}}" id="img">
+                        </div>
+                        <div class="msg_text">
+                            <h3>{{users_name}}</h3>
+                        </div>
+                    </a>
+                {{/each}}
+            {{/if}}
         </div>
     </section>
     <main>

@@ -50,20 +50,22 @@
                     <p>10:00</p>
                 </div>
             </div> --}}
-            {{#each users}}
-                <a href="/app/conversa/{{users_id}}" class="contato">
-                    <div class="msg_img">
-                        <img src="{{users_img}}" id="img">
-                    </div>
-                    <div class="msg_text">
-                        <h3>{{users_name}}</h3>
-                        <p>conversa</p>
-                    </div>
-                    <div class="msg_hora">
-                        <p>10:00</p>
-                    </div>
-                </a>
-            {{/each}}
+            {{#if users}}
+                {{#each users}}
+                    <a href="/app/conversa/{{users_id}}" class="contato">
+                        <div class="msg_img">
+                            <img src="{{users_img}}" id="img">
+                        </div>
+                        <div class="msg_text">
+                            <h3>{{users_name}}</h3>
+                            <p>conversa</p>
+                        </div>
+                        <div class="msg_hora">
+                            <p>10:00</p>
+                        </div>
+                    </a>
+                {{/each}}
+            {{/if}}
         </div>
     </section>
                         

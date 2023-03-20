@@ -3,9 +3,6 @@ const router = require('express').Router()
 const bodyParser = require('body-parser');
 const db = require('../config/db/Connect');
 
-var path = require('path');
-
-
 router.use(bodyParser.urlencoded({extended:true}));
 
 
@@ -307,7 +304,7 @@ router.post('/alterar/:id', (req, res) => {
                         res.redirect('/app/minha_conta');
                     }else {
                         req.session.admin = await result;
-                        await res.redirect('/app/minha_conta')
+                        res.redirect('/app/minha_conta')
                     }
                 })
             }
