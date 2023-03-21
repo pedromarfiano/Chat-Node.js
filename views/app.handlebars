@@ -84,11 +84,13 @@
                 </div>
             </div>
             <div class="mensagens">
-                {{!-- {{#if msg}} --}}
                     {{#each message}}
-                        <div class="your_msg msg"><p>{{msg}}</p></div>
+                        {{!-- {{#if admin.users_id=msg_remetente_id}} --}}
+                            {{!-- <div class="my_msg msg"><p>{{msg}}</p></div> --}}
+                        {{!-- {{else}} --}}
+                            <div class="your_msg msg"><p>{{msg}}</p></div>
+                        {{!-- {{/if}} --}}
                     {{/each}}
-                {{!-- {{/if}} --}}
                 <!--<div class="my_msg msg"><p>oi</p></div>
                 <div class="your_msg msg"><p>oi</p></div>-->
             </div>
@@ -130,14 +132,21 @@
         console.log(msg);
     })
 
-    socket.on('msgServer', (msg) =>{
+    socket.on('msgServer', (msg, id_msg) => {
 
         var div = document.createElement('div');
         div.classList.add('msg');
         div.innerHTML = `<p>${msg}</p>`
         div_msg.appendChild(div);
 
-        console.log(msg);
+        if(id == id_msg){
+            div.classList.add('my_msg') 
+        }
+        else{
+            div.classList.add('your_msg') 
+        }
+
+        console.log(`id: ${id} id_U: ${id_msg}`);
     })
 
     function env_mensage(){

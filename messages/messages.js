@@ -20,12 +20,10 @@ io.on("connection", (socket) => {
     })
     socket.on('msg', (msg, id) =>{
         console.log(`email: ${id}, mensagem: ${msg}`)
-        
-        //if(id == row.users_id){
-            socket.emit('msgServer', msg);
-            socket.broadcast.emit('msgServer', msg);
-            //socket.emit('msgServer', msg) //,classe = "my_msg");
-        //}
+
+        socket.emit('msgServer', msg, id);
+        socket.broadcast.emit('msgServer', msg, id);
+
     })
 
 
@@ -42,18 +40,12 @@ router.get('/app/conversa/:id', (req, res) => {
             socket.emit('dados', 
                 id = row.users_id
             )
-            socket.on('msg', (msg, id) =>{
-                //console.log(`email: ${id}, mensagem: ${msg}`)
-                
-                //if(id == row.users_id){
-                    db.query("INSERT INTO tbmessages(msg_remetente_id, msg_destinatario_id, msg) VALUES(?, ?, ?)", [row.users_id, req.params.id, msg], (err, result) =>{
-                        if(err) throw err;
-    
+            socket.on('msg', (msg) =>{
+                db.query("INSERT INTO tbmessages(msg_remetente_id, msg_destinatario_id, msg) VALUES(?, ?, ?)", [row.users_id, req.params.id, msg], (err, result) =>{
+                    if(err) throw err;
 
-                    })
-                    //socket.emit('msgServer', msg);
-                    //socket.emit('msgServer', msg) //,classe = "my_msg");
-                //}
+
+                })
             })
 
         })
