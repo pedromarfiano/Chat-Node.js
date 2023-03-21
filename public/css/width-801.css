@@ -200,7 +200,7 @@
 
 
     .mensagens{
-        width: 100%;
+        width: 95%;
         height: 75%;
         overflow: auto;
         padding: 5px;
@@ -220,6 +220,7 @@
         background-color: rgb(243, 243, 243);
         border-radius: 5px;
         overflow-wrap: break-word;
+        padding: 5px 3px 5px 3px;
         
     }
 
@@ -244,11 +245,12 @@
     }
 
     .your_msg p{
-        width: 70%;
+        width: 50px;
         border: 1px solid rgb(213, 247, 255);
         background-color: rgb(213, 247, 255);
         border-radius: 5px;
         overflow-wrap: break-word;
+        padding: 5px 3px 5px 3px;
 
     }
     #enviar{
@@ -256,10 +258,7 @@
         height: 70px;
         margin-top: px;
         
-
-    }   
-    
-
+    }
     #txtMsg{
         width: 80%;
         height: 25px;
@@ -283,12 +282,9 @@
     }
 
 
-}
-
-     
-
- 
+   
 
 
     
 
+}
