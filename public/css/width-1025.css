@@ -1,0 +1,298 @@
+@media only screen and (max-width: 1025px) { /* big landscape tablets, laptops, and desktops */ 
+
+    body{
+        background-color:  #F5F8FD;
+        width: auto;
+        height: auto;
+        display: flex;
+
+    }
+    header{
+        background-color:  #FFFFFF;
+        width: 7%;
+        height: 100vh;
+        display: block;
+    }
+
+    nav{
+        margin-top: 180px;
+        text-align: center;
+        
+     }
+
+     nav ul li{
+        margin-top: 30px;
+        text-align: center;
+     }
+     nav ul li a{
+        color: #515151;
+        padding: 15%;
+     }
+
+    form{
+        margin-top: 180px;
+        text-align: center;
+        color: #515151; 
+    }
+
+    form button{
+        border: 1px transparent;
+        background-color: transparent;
+    }
+
+
+    .logo{
+        padding: 5px;  
+    }
+
+    .logo img{
+        width: 40px;
+        height: 40px;
+        padding: 5px;
+    }
+
+    
+
+
+    /*section*/
+
+    section{
+        width: 30%;
+        height: 100vh;
+        background-color: #F5F8FD;
+        border-right: 1px solid #ccc;
+        overflow: auto;
+    }
+
+    section h1{
+        color: rgb(0, 156, 217);
+        padding: 20px;
+    }
+    .search_bar{
+            height: 10%;
+            text-align: center;
+            padding: 10px;
+            
+    }
+
+    .search{
+        float: left;
+        width: 200px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        
+    }
+
+    .contatos{
+        width: auto;
+        height: auto;
+        background-color: rgb(80, 80, 80);
+        
+    }
+     /*barra de busca de contato*/
+    
+    .search input[type="text"]{
+        float: left;
+        width: 85%;
+        height: 30px;
+        border: none;
+        border-radius: 5px;
+        background-color: white;
+        outline: 0;
+
+    }
+
+    .search button{
+        float: left;
+        width: 15%;
+        height: 30px;
+        border: none;
+        border-radius: 5px;
+        background-color: white;
+
+
+    }
+    .search button img{
+        width: 25px;
+        height: 25px;
+    }
+
+    
+    /*cria uma linha para cada contado separando as mensagens*/
+    .contato{  
+        background-color: #F5F8FD;
+        display: flex;
+        border-bottom: 1px solid #ddd;  
+        padding: 5px;
+    }
+
+
+    #contato_img{
+        width: 40px;
+        height: 40px;
+        border-radius: 100%;
+        margin-top: 10px;
+        margin-left: 10px;
+        
+    }
+
+    .msg_text{
+        margin-top: 5%;
+        margin-left: 20px;
+        
+
+    }
+
+    .msg_text p{
+        color: #a8a8a8;
+
+    }
+
+    .msg_hora{
+        width: 40%;
+        height: 100%;
+        
+           
+        
+    }
+
+    .msg_hora p{
+        text-align: right;
+        margin-top: 40px;
+        color: #a8a8a8;
+    }
+
+
+
+    main{
+        width: 70%;
+        height: 100vh;
+        background-color: #FFFFFF;
+        display: block;
+    
+    }
+    .contato_ativo{
+        border-bottom: 1px solid #ccc;
+        display: flex;
+       
+    }
+
+
+    .contato_text{
+        margin-left: 20px;
+        margin-top: 3%;
+    }
+
+    .contato_text p{
+        color: #a8a8a8;
+    }
+
+    .contato_input{
+        width: 100%;
+        height: 10%;
+        text-align: center;
+        border-radius: 5px;
+    }
+
+
+   
+
+    #msg_img{
+        width: 40px;
+        height: 40px;
+        border-radius: 100%;
+        margin-top: 10px;
+        margin-left: 10px;
+        padding: 5px;
+    }
+
+
+    .mensagens{
+        width: 100%;
+        height: 85%;
+        overflow: auto;
+        padding: 5px;
+    }
+        
+
+    .my_msg{
+        width: 50%; 
+        position: relative;
+        padding: 5px;  
+        color: black;
+        border-radius: 5px;
+    }
+
+    
+      
+       
+
+    .my_msg p{
+
+        width: 100%;
+        border: 1px solid rgb(243, 243, 243);
+        background-color: rgb(243, 243, 243);
+        text-align: right;
+        margin-left: 200px;
+        border-radius: 5px;
+        overflow-wrap: break-word;
+        padding: 5px 3px 5px 3px;
+        
+        
+    }
+
+   
+    
+
+    .your_msg{
+        padding: 5px;
+        color: black;
+        position: relative;
+        border-radius: 5px;
+        
+        
+    }
+
+    .your_msg p{
+        width: 50px;
+        border: 1px solid rgb(213, 247, 255);
+        background-color: rgb(213, 247, 255);
+        border-radius: 5px;
+        overflow-wrap: break-word;
+        padding: 5px 3px 5px 3px;
+        
+
+    }
+    #enviar{
+        width: 70px;
+        height: 70px;
+        margin-top: px;
+        
+    }
+    #txtMsg{
+        width: 80%;
+        height: 25px;
+        margin-top: 20px;
+        border-color: 1px #ccc;
+        
+        outline: 0;
+        
+    }
+    .contato_input button{
+        width: 30px;
+        height: 30px;
+        background-color: rgb(75, 198, 247);
+        border: none;
+        
+    }
+
+    .contato_input button img{
+        width: 20px;
+        height: 20px;
+    }
+
+
+    
+
+    
+}

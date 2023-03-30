@@ -1,290 +1,330 @@
-@media (min-width: 801px) { /* tablet, landscape iPad, lo-res laptops ands desktops */ 
-
-    header{
-        background-color:  #FFFFFF;
-        width: 7%;
-        height: 100vh;
-    }
-
-    nav{
-        margin-top: 180px;
-        text-align: center;
-        
-     }
-
-     nav ul li{
-        margin-top: 30px;
-        text-align: center;
-     }
-     nav ul li a{
-        color: #515151;
-        padding: 15%;
-     }
-
-    form{
-        margin-top: 180px;
-        text-align: center;
-        color: #515151; 
-    }
-
-    form button{
-        border: 1px transparent;
-        background-color: transparent;
-    }
-
-
-    .logo{
-        padding: 5px;  
-    }
-
-    .logo img{
-        width: 40px;
-        height: 40px;
-        padding: 5px;
-    }
-
+@media only screen and (max-width: 801px) { /* tablet, landscape iPad, lo-res laptops ands desktops*/
     
 
 
-    /*section*/
 
-    section{
-        width: 30%;
-        height: 100vh;
-        background-color: #F5F8FD;
-        border-right: 1px solid #ccc;
-        overflow: auto;
-    }
+header{
+    display: none;
+}
+main{
+    display: block;
+}
+section{
+    display: none;
+    width: 100%;
+}
 
-    section h1{
-        color: rgb(0, 156, 217);
-        padding: 20px;
-    }
-    .search_bar{
-            height: 10%;
-            text-align: center;
-            padding: 10px;
-            
-    }
 
-    .search{
-        float: left;
-        width: 200px;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        
-    }
 
-    .contatos{
-        width: auto;
-        height: auto;
-        background-color: rgb(80, 80, 80);
-        
-    }
-     /*barra de busca de contato*/
+.container{
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background: #fff;
+    box-shadow: 0 5px 5px rgb(0,0,0,0.15);
+}
+
+.header{
+    position: relative;
+    background: #008069;
+    padding: 20px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     
-    .search input[type="text"]{
-        float: left;
-        width: 85%;
-        height: 30px;
-        border: none;
-        border-radius: 5px;
-        background-color: white;
-        outline: 0;
+}
 
-    }
+.header .logo{
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1em;
+}
+.header .action{
+    position: relative;
+    display: flex;
+    gap: 15px;  
+}
 
-    .search button{
-        float: left;
-        width: 15%;
-        height: 30px;
-        border: none;
-        border-radius: 5px;
-        background-color: white;
+.header .action a{
+    color: #fff;
+    display: flex;
+    font-size: 1.5em;
+    text-decoration: none;
+}
 
-
-    }
-    .search button img{
-        width: 25px;
-        height: 25px;
-    }
-
-    
-    /*cria uma linha para cada contado separando as mensagens*/
-    .contato{  
-        background-color: #F5F8FD;
-        display: flex;
-        border-bottom: 1px solid #ddd;  
-        padding: 5px;
-    }
-
-
-    #contato_img{
-        width: 40px;
-        height: 40px;
-        border-radius: 100%;
-        margin-top: 10px;
-        margin-left: 10px;
-        
-    }
-
-    .msg_text{
-        margin-top: 5%;
-        margin-left: 20px;
-        
-
-    }
-
-    .msg_text p{
-        color: #a8a8a8;
-
-    }
-
-    .msg_hora{
-        width: 40%;
-        height: 100%;
-        
-           
-        
-    }
-
-    .msg_hora p{
-        text-align: right;
-        margin-top: 40px;
-        color: #a8a8a8;
-    }
-
-
-
-    main{
-        width: 70%;
-        height: 100vh;
-        background-color: #FFFFFF;
-        
-    
-    }
-    .contato_ativo{
-        border-bottom: 1px solid #ccc;
-        display: flex;
-       
-    }
-
-
-    .contato_text{
-        margin-left: 20px;
-        margin-top: 3%;
-    }
-
-    .contato_text p{
-        color: #a8a8a8;
-    }
-
-    .contato_input{
-        width: 100%;
-        height: 10%;
-        text-align: center;
-        border-radius: 5px;
-    }
-
-
+.container .data{
+    position: relative;
+    width: 100%;
+    height: 510px;
+}
+.chatlist{
+    width: 100%;
+    height: 94vh;
+    overflow: auto;
+}
+.chatlist .block{
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 10px;
+    padding: 15px 10px;
+    display: flex;
+    cursor: pointer;
    
-
-    #msg_img{
-        width: 40px;
-        height: 40px;
-        border-radius: 100%;
-        margin-top: 10px;
-        margin-left: 10px;
-        padding: 5px;
-    }
+}
 
 
-    .mensagens{
-        width: 95%;
-        height: 75%;
-        overflow: auto;
-        padding: 5px;
-    }
-        
+.chatlist .block:hover{
+    background: #f5f5f5;
+}
 
-    .my_msg{
-        height: 50%;
-        color: rgb(0, 0, 0);
-        
-        
-    }
+.chatlist .block .imgbx{
+    position: relative;
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+    border-radius: 50%;
+}
 
-    .my_msg p{
-        width: 95%;
-        border: 1px solid rgb(243, 243, 243);
-        background-color: rgb(243, 243, 243);
-        border-radius: 5px;
-        overflow-wrap: break-word;
-        padding: 5px 3px 5px 3px;
-        
-    }
-
-    .space{
-        width: 40%;
-    }
-
-    .rigth{
-        width: 100%;
-        display: flex;
-    }
-
-
+.chatlist .block .imgbx img{
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.chatlist .block .details{
+    position: relative;
+    width: 100%;
+}
+.chatlist .block .details .listHead{
+    display: flex;
+    justify-content: space-between;
+}
+.chatlist .block .details .listHead h4{
+    font-size: 1em;
+    font-weight: 600;
+    width: 100%;
+    color: #111;
+}
+.chatlist .block .details .listHead p{
+    font-size: 0.75em;
+    color: #555;
     
+}
+.chatlist .block .details .listHead .message_p{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
-    .your_msg{
-        padding: 5px;
-        color: black;
-        position: relative;
-        border-radius: 5px;
-        
-    }
-
-    .your_msg p{
-        width: 50px;
-        border: 1px solid rgb(213, 247, 255);
-        background-color: rgb(213, 247, 255);
-        border-radius: 5px;
-        overflow-wrap: break-word;
-        padding: 5px 3px 5px 3px;
-
-    }
-    #enviar{
-        width: 70px;
-        height: 70px;
-        margin-top: px;
-        
-    }
-    #txtMsg{
-        width: 80%;
-        height: 25px;
-        margin-top: 20px;
-        border-color: 1px #ccc;
-        
-        outline: 0;
-        
-    }
-    .contato_input button{
-        width: 30px;
-        height: 30px;
-        background-color: rgb(75, 198, 247);
-        border: none;
-        
-    }
-
-    .contato_input button img{
-        width: 20px;
-        height: 20px;
-    }
+.chatlist .block .details p{
+    color: #555;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    font-size: 0.9em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+}
 
 
+.chatBox{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #efe6dd;
+    z-index: 10000;
+}
+
+.chatBox.hide
+{
+    display: none;
+}
+
+.chatBox::before{
+    content: " ";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: url(./img/pattern.png);
+    opacity: 0.05;
+} 
+
+.chat_Header{
+    position: relative;
+    width: 100%;
+    padding: 10px;
+    background-color: #008069;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.chat_Header .img_content{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+}
+
+.chat_Header .img_content ion-icon{
+    color: #fff;
+    cursor: pointer;
+    font-size: 1.25em;
+
+}
+
+ion-icon{
+    cursor: pointer;
+
+}
+
+.chat_Header .img_content .imgBox{
+    position: relative;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.chat_Header .img_content .imgBox img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.chat_Header .img_content h3{
+    color: #fff;
+    font-size: 1em;
+    font-weight: 500;
+    line-height: 1.1em;
+    
+}
+.actionsBtns{
+    position: relative;
+    display: flex;
+    color: #fff;
+    gap: 15px;
+
+}
+
+.messageBox{
+    position: relative;
+    padding: 20px;
+    height: px;
+    overflow: auto;
+
+}
+
+
+
+
+.messageInput{
+    position: absolute;
+    margin-top: 10px;
+    left: 0;
+    width: 100%;
+    padding: 5PX 10PX;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+
+}
+
+
+.messageInput input{
+    position: relative;
+    background-color: #fff;
+    padding: 5px;
+    width: 270px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 40px;
+    border: none;
+    outline: none;
+    
+}
+.messageInput button{
+    width: 30px;
+    height: 30px;
+    background-color: rgb(75, 198, 247);
+    border: none;
+    
+}
+
+.messageInput button img{
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.messageBox .message{
+    position: relative;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 10px;
+    border-top-left-radius: 0;
+    overflow-wrap: break-word;
+
+}
+
+.messageBox .message::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -10px;
+    border: 10px solid transparent;
+    border-top: 10px solid #fff;
+}
+
+.contato_input{
+    width: 100%;
+    height: 50px;
+    border: 1px solid black;
+}
+
+#enviar{
+    width: 70px;
+    height: 70px;
    
-
-
     
+}
+#txtMsg{
+    width: 80%;
+    height: 50px;
+    border-color: 1px #ccc;
+    outline: 0;
+    
+}
+.contato_input button{
+    width: 50px;
+    height: 50px;
+    background-color: rgb(75, 198, 247);
+    border: none;
+    
+}
+
+.contato_input button img{
+    width: 50px;
+    height: 50px;
+}
+
+
+.pc{
+    display: none;
+}
 
 }
