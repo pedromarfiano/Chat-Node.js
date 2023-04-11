@@ -167,7 +167,7 @@
     socket.on('dados', (U_id, id_socket) =>{
         id = U_id,
         id_Socket = id_socket;
-        console.log(id_Socket);
+        //console.log(id);
     })
 
     socket.on('socketEmit', (msg) => {
@@ -176,15 +176,7 @@
         div.innerHTML = `<p>${msg}</p>`
         div_msg.appendChild(div);
 
-        //console.log(msg);
-    })
-    socket.on('atualizarSockets', (socketUsersID) {
-        //var div = document.createElement('div');
-        //div.classList.add('msg');
-        //div.innerHTML = `<p>${msg}</p>`
-        //div_msg.appendChild(div);
-
-        console.log(socketUsersID);
+        console.log(msg);
     })
 
     socket.on('msgServer', (msg, id_msg) => {

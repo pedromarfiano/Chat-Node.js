@@ -188,10 +188,10 @@
     }
 
     .contato_input{
-        width: 100%;
-        height: 10%;
+        width: 65%;
+        height: 5%;
         text-align: center;
-        border-radius: 5px;
+        bottom: 0;
     }
 
 
@@ -209,14 +209,14 @@
 
     .mensagens{
         width: 95%;
-        height: 80%;
+        height: 85%;
         overflow: auto;
         padding: 5px;
     }
         
 
     .my_msg{
-        width: 50%; 
+        width: 70%; 
         position: relative;
         padding: 5px;  
         color: black;
@@ -266,13 +266,12 @@
     #enviar{
         width: 70px;
         height: 70px;
-        margin-top: px;
+        
         
     }
     #txtMsg{
-        width: 80%;
+        width: 10%;
         height: 25px;
-        margin-top: 20px;
         border-color: 1px #ccc;
         
         outline: 0;
@@ -291,7 +290,26 @@
         height: 20px;
     }
 
-     /*MINHA CONTA*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+
+MINHA CONTA
  #minha_conta{
     display: grid;
     grid-template-columns: 100%;
@@ -334,7 +352,7 @@
     margin: auto;
 }
 
-    
+*/
 
     
 }

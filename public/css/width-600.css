@@ -21,6 +21,10 @@
         display: block;
     }
 
+    .contato_ativo{
+        background-color: white;
+    }
+
     .contato_ativo ion-icon{
         width: 20px;
         height: 20px;

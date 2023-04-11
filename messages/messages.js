@@ -7,24 +7,13 @@ const app = express();
 const http = require('http').createServer(app);
 const io = new Server(http);
 
-function atualizar() {
-    // db.query("SELECT * FROM tbusers WHERE users_id != ?", [], (err, result) => {
-    //     if(err) throw err;
-        
-    // });
-    
-}
-let socketUsersID = [];
-//let UsersID = [];
 //SERVIDOR WS
 io.on("connection", (socket) => {
-   
-    console.log(`Connected ${socket.id}`);
+    //let socketUsersID = [];
+    //let UsersID = [];
+    
     // AO CONECTAR
-    socketUsersID.push(socket.id);
-    socket.emit('atualizarSockets',
-        socketUsersID
-    )
+    //socketUsersID.push(socket.id);
     socket.broadcast.emit('socketEmit', `socket ${socket.id} conectado`);
     console.log(`novo socket ${socket.id}`);
     
@@ -38,13 +27,6 @@ io.on("connection", (socket) => {
     })
 
     socket.on('disconnect', () => {
-        console.log(`Disconnected ${socket.id}`)
-        socketUsersID = socketUsersID.filter(item => item != socket.id);
-        socket.emit('atualizarSockets', 
-            socketUsersID,
-            console.log(socketUsersID)
-        )
-
         socket.emit('socketEmit', `socket desconectado ${socket.id}`)
         console.log(`socket desconectado ${socket.id}`);
     })
@@ -58,8 +40,6 @@ router.get('/app/conversa/:id', (req, res) => {
         const row = admin[0]
 
         io.on("connection", (socket) => {
-
-            //console.log(`Connected ${socket.id}`);
 
             socket.userID = row.users_id;
 
