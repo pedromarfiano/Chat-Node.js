@@ -21,10 +21,13 @@
         display: block;
     }
 
+<<<<<<< HEAD
     .contato_ativo{
         background-color: white;
     }
 
+=======
+>>>>>>> 45a411f9410b7e42ec42569b7f5f7ddf888463e2
     .contato_ativo ion-icon{
         width: 20px;
         height: 20px;

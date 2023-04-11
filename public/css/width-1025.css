@@ -188,10 +188,17 @@
     }
 
     .contato_input{
+<<<<<<< HEAD
         width: 65%;
         height: 5%;
         text-align: center;
         bottom: 0;
+=======
+        width: 100%;
+        height: 10%;
+        text-align: center;
+        border-radius: 5px;
+>>>>>>> 45a411f9410b7e42ec42569b7f5f7ddf888463e2
     }
 
 
@@ -209,14 +216,22 @@
 
     .mensagens{
         width: 95%;
+<<<<<<< HEAD
         height: 85%;
+=======
+        height: 80%;
+>>>>>>> 45a411f9410b7e42ec42569b7f5f7ddf888463e2
         overflow: auto;
         padding: 5px;
     }
         
 
     .my_msg{
+<<<<<<< HEAD
         width: 70%; 
+=======
+        width: 50%; 
+>>>>>>> 45a411f9410b7e42ec42569b7f5f7ddf888463e2
         position: relative;
         padding: 5px;  
         color: black;
@@ -266,12 +281,22 @@
     #enviar{
         width: 70px;
         height: 70px;
+<<<<<<< HEAD
         
         
     }
     #txtMsg{
         width: 10%;
         height: 25px;
+=======
+        margin-top: px;
+        
+    }
+    #txtMsg{
+        width: 80%;
+        height: 25px;
+        margin-top: 20px;
+>>>>>>> 45a411f9410b7e42ec42569b7f5f7ddf888463e2
         border-color: 1px #ccc;
         
         outline: 0;
@@ -290,6 +315,7 @@
         height: 20px;
     }
 
+<<<<<<< HEAD
 
 
 
@@ -310,6 +336,9 @@
 /*
 
 MINHA CONTA
+=======
+     /*MINHA CONTA*/
+>>>>>>> 45a411f9410b7e42ec42569b7f5f7ddf888463e2
  #minha_conta{
     display: grid;
     grid-template-columns: 100%;
@@ -352,7 +381,11 @@ MINHA CONTA
     margin: auto;
 }
 
+<<<<<<< HEAD
 */
+=======
+    
+>>>>>>> 45a411f9410b7e42ec42569b7f5f7ddf888463e2
 
     
 }

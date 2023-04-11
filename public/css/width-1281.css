@@ -188,7 +188,11 @@
     }
 
     .contato_input{
+<<<<<<< HEAD
         width: 65%;
+=======
+        width: 100%;
+>>>>>>> 45a411f9410b7e42ec42569b7f5f7ddf888463e2
         text-align: center;
         border-radius: 5px;
     }
@@ -215,7 +219,11 @@
         
 
     .my_msg{
+<<<<<<< HEAD
         width: 42%; 
+=======
+        width: 50%; 
+>>>>>>> 45a411f9410b7e42ec42569b7f5f7ddf888463e2
         position: relative;
         padding: 5px;  
         color: black;
@@ -265,11 +273,19 @@
     #enviar{
         width: 70px;
         height: 70px;
+<<<<<<< HEAD
+=======
+        margin-top: px;
+>>>>>>> 45a411f9410b7e42ec42569b7f5f7ddf888463e2
         
     }
     #txtMsg{
         width: 80%;
         height: 25px;
+<<<<<<< HEAD
+=======
+        margin-top: 40px;
+>>>>>>> 45a411f9410b7e42ec42569b7f5f7ddf888463e2
         border-color: 1px #ccc;
         outline: 0;
         
@@ -288,6 +304,7 @@
     }
 
 
+<<<<<<< HEAD
 
 
 
@@ -295,6 +312,8 @@
 
 
     
+=======
+>>>>>>> 45a411f9410b7e42ec42569b7f5f7ddf888463e2
  /*MINHA CONTA*/
     #minha_conta{
         display: grid;

@@ -7,29 +7,35 @@ const app = express();
 const http = require('http').createServer(app);
 const io = new Server(http);
 
+function atualizar() {
+    // db.query("SELECT * FROM tbusers WHERE users_id != ?", [], (err, result) => {
+    //     if(err) throw err;
+        
+    // });
+    
+}
+let socketUsersID = [];
+//let UsersID = [];
 //SERVIDOR WS
 io.on("connection", (socket) => {
-    //let socketUsersID = [];
-    //let UsersID = [];
-    
+
     // AO CONECTAR
-    //socketUsersID.push(socket.id);
-    socket.broadcast.emit('socketEmit', `socket ${socket.id} conectado`);
     console.log(`novo socket ${socket.id}`);
-    
-    // socket.join(socket.id);
-
-    socket.on('msg', (msg, id) =>{
-        console.log(`email: ${id}, mensagem: ${msg}`)
-        socket.broadcast.emit('msgServer', msg, id);
-        socket.emit('msgServer', msg, id);
-
-    })
-
+    // MANDA PRO FRONTEND QUE UM SOCKET FOI CONECTADO
+    socket.broadcast.emit('socketEmit', `socket ${socket.id} conectado`);
+    // AO SAIR
     socket.on('disconnect', () => {
         socket.emit('socketEmit', `socket desconectado ${socket.id}`)
         console.log(`socket desconectado ${socket.id}`);
     })
+    socket.on('msg', (msg, id) =>{
+        console.log(`email: ${id}, mensagem: ${msg}`)
+
+        socket.emit('msgServer', msg, id);
+        socket.broadcast.emit('msgServer', msg, id);
+
+    })
+
 
 });
 
@@ -40,10 +46,6 @@ router.get('/app/conversa/:id', (req, res) => {
         const row = admin[0]
 
         io.on("connection", (socket) => {
-
-            socket.userID = row.users_id;
-
-            //socket.join(socket.id);
 
             socket.emit('dados', 
                 id = row.users_id,
