@@ -1,5 +1,19 @@
 <head>
     <link rel="stylesheet" href="/css/main.css">
+    {{#if conversa}}
+        <style>
+
+        </style>
+        {{else}}
+        <style>
+            section{
+                display: block;
+            }
+            main{
+                display: none;
+            }
+        </style>
+    {{/if}}
 </head>
 <body>
     <header>

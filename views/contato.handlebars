@@ -26,11 +26,26 @@
         </div>
     </header>
     <!--SESSÃO ONDE CONTEM AS INFORMAÇÕES QUE IRÃO MUDAR-->
-    <section>
+    <section id="info_contato">
         <h1>Whatzipps</h1>
+        <h2>informações de contato</h2>
 
-        <img src="{{contato.users_img}}" alt="imagem do contato">
-        <h3>{{contato.users_name}}</h3>
+        <input type="image" src="{{contato.users_id}}" alt="imagem de usuario">
+        
+        <p>online</p>
+
+        <!--<img id="img_perfil" src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="imagem de usuario">-->
+
+            <h4><p>Nome</p></h4>
+            <p>{{contato.users_name}}</p>
+
+            <h4><p>Email</p></h4>
+            <p>{{contato.users_email}}</p>
+
+            <button><a href="/app/conversa/{{contato.users_id}}">mandar mensagem</a></button>
+            <button><a href="/app/conversa/{{contato.users_id}}">excluir mensagens</a></button>
+
+
     </section>
     <main>
         <img src="" alt="">

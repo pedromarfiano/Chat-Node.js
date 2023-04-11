@@ -1,0 +1,69 @@
+
+
+
+@media only screen and (min-width: 481px) and (max-width: 600px) { /* portrait tablets, portrait iPad, e-readers (Nook/Kindle), landscape 800x480 phones (Android) */
+    header{
+        display: none;
+        width: 100%;
+    }
+    nav ul{
+        display: grid;
+        row-gap: 50px;
+    }
+
+    nav ul li a{
+        width: 10px;
+        height: 10px;
+        padding: 4%;
+    
+    }
+    main{
+        display: block;
+    }
+
+    .contato_ativo ion-icon{
+        width: 20px;
+        height: 20px;
+        margin-top: 10px;
+        padding: 10px;
+    }
+
+
+    section{
+        display: none;
+        width: 100%;
+    }
+
+    .section_bar{
+        width: 100%;
+        display: flex;
+    }
+
+    .section_bar button{
+        width: 40px;
+        height: 40px;
+        background-color: transparent;
+        border: none;
+        position: relative;
+        margin-top: 20px;
+        margin-left: 50%;
+        
+    }
+
+    .section_bar button ion-icon{
+        width: 20px;
+        height: 20px;
+    }
+}
+
+#txtMsg {
+    width: 80%;
+    height: 25px;
+    border-color: 1px #ccc;
+    outline: 0;
+}
+
+.contato_input{
+    position: fixed;
+    bottom: 0;
+}
