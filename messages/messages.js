@@ -15,7 +15,7 @@ function atualizar() {
     
 }
 let socketUsersID = [];
-let UsersID = [];
+//let UsersID = [];
 //SERVIDOR WS
 io.on("connection", (socket) => {
    
