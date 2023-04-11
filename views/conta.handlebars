@@ -26,7 +26,7 @@
         </div>
     </header>
     <!--SESSÃO ONDE CONTEM AS INFORMAÇÕES QUE IRÃO MUDAR-->
-    <section>
+    <section id="minha_conta">
         <h1>Whatzipps</h1>
 
         {{#if erros}}
@@ -35,8 +35,11 @@
                 {{else}}
             {{/each}}
         {{/if}}
-        <form action="/alterar/{{admin.users_id}}" method="post">
-            <label for="User"><p>Nome</p></label>
+        <form id="load_image" action="/alterar/imagem/" method="post">
+            <input type="image" src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="imagem de usuario">
+        </form>
+        <form  id="load_text" action="/alterar/{{admin.users_id}}" method="post">
+             <label for="User"><p>Nome</p></label>
             <input type="User" name="User" id="" value="{{admin.users_name}}">
 
             <label for="Email"><p>Email</p></label>

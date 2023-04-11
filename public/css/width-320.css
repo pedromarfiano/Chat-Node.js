@@ -1,6 +1,8 @@
 @media only screen and (max-width: 320px) { /* smartphones, portrait iPhone, portrait 480x320 phones (Android) */
     header{
         display: none;
+        width: 100%;
+        
     }
     main{
         display: block;
@@ -303,6 +305,7 @@
         margin-top: 40px;
         border-color: 1px #ccc;
         outline: 0;
+        cursor: pointer;
         
     }
     .contato_input button{
@@ -323,11 +326,10 @@
 
    
     
-    .pc{
-        display: none;
+    .contato_input{
+        position: fixed;
+        bottom: 0;
     }
-    
-    
     
         
     }

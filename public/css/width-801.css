@@ -5,9 +5,22 @@
 
 header{
     display: none;
+    width: 100%;
 }
 main{
     display: block;
+}
+
+nav ul{
+    display: grid;
+    row-gap: 50px;
+}
+
+nav ul li a{
+    width: 10px;
+    height: 10px;
+    padding: 4%;
+
 }
 section{
     display: none;
@@ -322,9 +335,9 @@ ion-icon{
     height: 50px;
 }
 
-
-.pc{
-    display: none;
+.contato_input{
+    position: fixed;
+    bottom: 0;
 }
 
 }

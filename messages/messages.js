@@ -9,9 +9,11 @@ const io = new Server(http);
 
 //SERVIDOR WS
 io.on("connection", (socket) => {
-
+    let socketUsersID = [];
+    let UsersID = [];
     
     // AO CONECTAR
+    socketUsersID.push(socket.id);
     socket.broadcast.emit('socketEmit', `socket ${socket.id} conectado`);
     console.log(`novo socket ${socket.id}`);
     
@@ -19,6 +21,8 @@ io.on("connection", (socket) => {
 
     socket.on('msg', (msg, id) =>{
         console.log(`email: ${id}, mensagem: ${msg}`)
+        socket.broadcast.emit('msgServer', msg, id);
+        socket.emit('msgServer', msg, id);
 
     })
 
@@ -39,18 +43,17 @@ router.get('/app/conversa/:id', (req, res) => {
 
             socket.userID = row.users_id;
 
-            socket.join(socket.id);
+            //socket.join(socket.id);
 
             socket.emit('dados', 
                 id = row.users_id,
                 id_socket = socket.userID
             )
             socket.on('msg', (msg, id) =>{
-                socket.to(socket.id).to(req.params.id).emit('msgServer', msg, id);
 
                 //console.log(`email: ${id}, mensagem: ${msg}`)
 
-                console.log(req.params.id)
+                //console.log(req.params.id)
 
                 db.query("INSERT INTO tbmessages(msg_remetente_id, msg_destinatario_id, msg) VALUES(?, ?, ?)", [row.users_id, req.params.id, msg], (err, result) =>{
                     if(err) throw err;

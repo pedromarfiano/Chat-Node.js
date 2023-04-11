@@ -2,6 +2,7 @@
 
     header{
         display: none;
+        width: 100%;
     }
     main{
         display: block;
@@ -9,6 +10,11 @@
     section{
         display: none;
         width: 100%;
+    }
+
+    .contato_input{
+        position: fixed;
+        bottom: 0;
     }
 
     
