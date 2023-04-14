@@ -1,6 +1,6 @@
 <head>
     <link rel="stylesheet" href="/css/main.css">
-    {{#if conversa}}
+    {{!-- {{#if conversa}}
         <style>
 
         </style>
@@ -13,37 +13,9 @@
                 display: none;
             }
         </style>
-    {{/if}}
+    {{/if}} --}}
 </head>
 <body>
-<!--
-
-
-
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-
-
-     
-<script>
-    let back = document.querySelector('.back');
-    let chatBox = document.querySelector('.chatBox');
-    let open = document.querySelector('.open');
-    
-
-    back.onclick = function(){
-        chatBox.classList.add('hide');
-    }
-    open.onclick = function(){
-        chatBox.classList.remove('hide');
-    }
-   
-    
-
-
-</script>
-</div>-->
-
     <header>
         <div class="logo">
             <img src="" alt="logo"> <h1>Whatzip</h1>
@@ -101,29 +73,21 @@
         </div>
     </section>
                         
-        {{#if conversa}}
             <main class="chatBox">
                 <div class="contato_ativo">
                      <ion-icon name="arrow-back-outline" class="back"></ion-icon>
                     <div class="contato_img">
-                        <img src="{{conversa.users_img}}" id="img">
+                        {{!-- <img src="{{conversa.users_img}}" id="img"> --}}
                     </div>
                     <div class="contato_text">
-                        <h3>{{conversa.users_name}}</h3>
+                        {{!-- <h3>{{conversa.users_name}}</h3> --}}
                         <p>escrevendo</p>
                     </div>
                     <div>
-                        <a href="/app/contato/{{conversa.users_id}}"><p>informaçõs do contato</p></a>
+                        {{!-- <a href="/app/contato/{{conversa.users_id}}"><p>informaçõs do contato</p></a> --}}
                     </div>
                 </div>
                 <div class="mensagens">
-                        {{#each message}}
-                            {{!-- {{#if admin.users_id=msg_remetente_id}} --}}
-                                {{!-- <div class="my_msg msg"><p>{{msg}}</p></div> --}}
-                            {{!-- {{else}} --}}
-                                <div class="your_msg msg"><p>{{msg}}</p></div>
-                            {{!-- {{/if}} --}}
-                        {{/each}}
                     <!--<div class="my_msg msg"><p>oi</p></div>
                     <div class="your_msg msg"><p>oi</p></div>-->
                 </div>
@@ -133,9 +97,7 @@
                     <button id="btn_env_msg"><i>mandar</i></button>
                 </div>
             </main>
-        {{else}}
-            <main class="chatBox"></main>
-        {{/if}}        
+            {{!-- <main class="chatBox"></main>       --}}
 
 </body>
 
@@ -152,38 +114,61 @@
         id = U_id,
         id_Socket = id_socket;
         console.log(id);
-        socket.emit('loggedin', {"user": id, "socket": id_Socket});
+        socket.emit('loggedin', user = id, socketID = socket.id);
+        //socket.emit('loggedin', {"user": id, "socket": id_Socket});
     })
 
-    socket.on('UploadListOnline', (result, socket) => {
-        let div = document.createElement('div');
-        div.classList.add('contato');
-        div.innerHTML = `
-            <div class="msg_img">
-                <img src="${result.users_img}" id="img">
-            </div>
-            <div class="msg_text">
-                <h3>${result.users_name}</h3>
-                <p>conversa</p>
-            </div>
-            <div class="msg_hora">
-                <p>10:00</p>
-            </div>
-        `;
-        div.addEventListener('click', (event) => {
-            getMsg();
-        })
-        function getMsg(){
-            //div_msg.removeChild(divMsg);
-            console.log('entrou');
-            socket.emit('GetMsg', id, result.users_id);
-            
-            socket.on('UploadListMessage', 
-                result
-            )
-        }
+    function getMsg(dt, rm){
+        console.log('entrou');
+        socket.emit('GetMsg', 
+            remetente = dt, destinatario = rm
+        );
+    } 
 
-        document.querySelector('.contatos').appendChild(div);
+    socket.on('UploadListOnline', (result, socket) => {
+
+        if(result.users_id != id){
+            let div = document.createElement('div');
+            div.classList.add('contato');
+            div.innerHTML = `
+                <div class="msg_img">
+                    <img src="${result.users_img}" id="img">
+                </div>
+                <div class="msg_text">
+                    <h3>${result.users_name}</h3>
+                    <p>conversa</p>
+                </div>
+                <div class="msg_hora">
+                    <p>10:00</p>
+                </div>`;
+
+            div.addEventListener('click', (event) => {
+                getMsg(id, result.users_id)
+            })
+
+            document.querySelector('.contatos').appendChild(div);
+        }
+    })
+
+    socket.on('UploadListMessage', (result) => {
+        
+        div_msg.innerHTML = '';
+        
+
+        result.forEach(item => EscreverMsg(item))
+
+        function EscreverMsg(item){
+            let div = document.createElement('div');
+            div.classList.add('msg');
+            div.innerHTML = `<p>${item.msg}</p>`
+            div_msg.appendChild(div);
+
+            if(item.msg_remetente_id != id){
+                div.classList.add('your_msg');
+            } else{
+                div.classList.add('my_msg');
+            }
+        }
     })
 
     socket.on('socketEmit', (msg) => {
@@ -195,7 +180,7 @@
         //console.log(msg);
     })
 
-    socket.on('msgServer', (msg, id_msg) => {
+    {{!-- socket.on('msgServer', (msg, id_msg) => {
 
         console.log(id_msg)
         let div = document.createElement('div');
@@ -211,7 +196,7 @@
         }
 
         //console.log(`id: ${id} id_U: ${id_msg}`);
-    })
+    }) --}}
 
     function env_mensage(){
         if(input_msg.value != 0){
@@ -233,7 +218,7 @@
 </script>
 
 
-    <script src="/js/jquery-3.5.1.min.js"></script>
+    {{!-- <script src="/js/jquery-3.5.1.min.js"></script> --}}
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 

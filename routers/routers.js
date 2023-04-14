@@ -7,36 +7,36 @@ router.use(bodyParser.urlencoded({extended:true}));
 
 
 // ROTAS DO APP
-router.get('/app/' , (req , res)=>{
-    if(req.session.logado){
-        const admin = req.session.admin;
-        // puxa o 1 valor de admin que é um array de objetos
-        const row = admin[0]
-        // // status se torna online
-        // row.users_status = true;
+// router.get('/app/' , (req , res)=>{
+//     if(req.session.logado){
+//         const admin = req.session.admin;
+//         // puxa o 1 valor de admin que é um array de objetos
+//         const row = admin[0]
+//         // // status se torna online
+//         // row.users_status = true;
 
-        // usuarios
-        db.query("SELECT * FROM tbusers WHERE users_id != ?", [row.users_id], (err, result) => {
-            if(err) throw err;
-            //console.log(result)
-            res.render('app', {admin: row, users: result, title: "Whatzipps"})
-        })
-        //res.render('app', {admin: row, title: "Whatzipps"})
+//         // usuarios
+//         db.query("SELECT * FROM tbusers WHERE users_id != ?", [row.users_id], (err, result) => {
+//             if(err) throw err;
+//             //console.log(result)
+//             res.render('app', {admin: row, users: result, title: "Whatzipps"})
+//         })
+//         //res.render('app', {admin: row, title: "Whatzipps"})
 
-    } 
-    else if(req.cookies.logado){
-        db.query("SELECT * FROM tbusers WHERE users_id = ? LIMIT 1", [req.cookies.logado], async (err, result) => {
-            if(err) res.redirect('/');
+//     } 
+//     else if(req.cookies.logado){
+//         db.query("SELECT * FROM tbusers WHERE users_id = ? LIMIT 1", [req.cookies.logado], async (err, result) => {
+//             if(err) res.redirect('/');
 
-            req.session.admin = await result;
-            req.session.logado = 'logado';
-            res.redirect('/app/')
-        })
-    }
-    else{
-        res.redirect('/');
-    }
-})
+//             req.session.admin = await result;
+//             req.session.logado = 'logado';
+//             res.redirect('/app/')
+//         })
+//     }
+//     else{
+//         res.redirect('/');
+//     }
+// })
 // router.get('/app/conversa/:id', (req, res) => {
 //     if(req.session.logado){
 //         const admin = req.session.admin;

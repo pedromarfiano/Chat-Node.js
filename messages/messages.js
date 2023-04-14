@@ -1,6 +1,7 @@
 const express = require('express');
 const { Server } = require('socket.io');
 const { router, db } = require('../routers/routers.js');
+const { Console } = require('console');
 const app = express();
 const http = require('http').createServer(app);
 const io = new Server(http);
@@ -11,13 +12,15 @@ let connectedUsers= [];
 var userID;
 
 function getID(id) {
-    userID = id
-    console.log(userID);
+    //userID = id
+    //console.log(id);
     io.on('connection', (socket) => {
+        console.log('dado')
         socket.emit('dados', 
-            emitID = userID,
+            emitID = id,
             id_socket = socket.id
-        )
+        );
+        //socket.emit('loggedin', user = id, socketID = socket.id);
         // socket.emit('uploadList', 
         //     {}
         // )
@@ -44,8 +47,8 @@ io.on("connection", (socket) => {
         socket.emit('socketEmit', `socket desconectado ${socket.id}`)
         //console.log(`socket desconectado ${socket.id}`);
 
-        connectedUsers = connectedUsers.filter(item => item.socketId != socket.id);
-        io.emit('updateUserList', connectedUsers)
+        // connectedUsers = connectedUsers.filter(item => item.socketId != socket.id);
+        // io.emit('updateUserList', connectedUsers)
     })
 
     // AO CONECTAR
@@ -55,11 +58,11 @@ io.on("connection", (socket) => {
 
     // MSG
 
-    socket.on('loggedin', function(user) {
-        db.query("SELECT * FROM tbusers WHERE users_id = ?", [user.user], (err, result) => {
+    socket.on('loggedin', function(userID, socketID) {
+        db.query("SELECT * FROM tbusers WHERE users_id = ?", [userID], (err, result) => {
             if (err) throw err;
 
-            socket.emit('UploadListOnline', result[0], user.socket);
+            socket.emit('UploadListOnline', result[0], socketID);
         })
         // clientSocketIds.push({socket: socket, userId:  user.user_id});
         // connectedUsers = connectedUsers.filter(item => item.user_id != user.user_id);
@@ -67,27 +70,27 @@ io.on("connection", (socket) => {
         // io.emit('updateUserList', connectedUsers)
     });
 
-    socket.on('GetMsg', (destinatario, remetente) => {
-        db.query("SELECT * FROM tbmessages WHERE msg_remetente_id = ? AND msg_destinatario_id = ? OR msg_remetente_id = ? AND msg_destinatario_id = ? ORDER BY msg_id", [remetente, destinatario, remetente, destinatario], (err, result) => {
+    socket.on('GetMsg', (remetente, destinatario) => {
+        db.query("SELECT * FROM tbmessages WHERE msg_remetente_id = ? AND msg_destinatario_id = ? OR msg_remetente_id = ? AND msg_destinatario_id = ? ORDER BY msg_id", [remetente, destinatario, destinatario, remetente], (err, result) => {
             if (err) throw err;
 
             socket.emit('UploadListMessage', result);
         })
     })
 
-    socket.on('create', function(data) {
-        console.log("create room")
-        socket.join(data.room);
-        let withSocket = getSocketByUserId(data.withUserId);
-        socket.broadcast.to(withSocket.id).emit("invite",{room:data})
-    });
-    socket.on('joinRoom', function(data) {
-        socket.join(data.room.room);
-    });
+    // socket.on('create', function(data) {
+    //     console.log("create room")
+    //     socket.join(data.room);
+    //     let withSocket = getSocketByUserId(data.withUserId);
+    //     socket.broadcast.to(withSocket.id).emit("invite",{room:data})
+    // });
+    // socket.on('joinRoom', function(data) {
+    //     socket.join(data.room.room);
+    // });
 
-    socket.on('message', function(data) {
-        socket.broadcast.to(data.room).emit('message', data);
-    })
+    // socket.on('message', function(data) {
+    //     socket.broadcast.to(data.room).emit('message', data);
+    // })
 
     // socket.on('msg', (msg, id) =>{
     //     console.log(`email: ${id}, mensagem: ${msg}`)
@@ -101,12 +104,13 @@ io.on("connection", (socket) => {
 });
 
 //ROTAS DE BATE-PAPO
-router.get('/app/conversa/:id', (req, res) => {
+router.get('/app/', (req, res) => {
     if(req.session.logado){
         const admin = req.session.admin;
         const row = admin[0]
 
-        getID(row.users_id);
+        getID(row.users_id)
+
 
         // io.on("connection", (socket) => {
 
@@ -128,20 +132,26 @@ router.get('/app/conversa/:id', (req, res) => {
 
         db.query("SELECT * FROM tbusers WHERE users_id != ?", [row.users_id], (err, result) => {
             if(err) throw err;
-            let result1 = result;
-            
-            db.query("SELECT * FROM tbusers WHERE users_id = ?", [req.params.id], (err, result) => {
-                if(err) throw err;
-                let result2 = result;
-
-                db.query("SELECT * FROM tbmessages WHERE msg_remetente_id = ? AND msg_destinatario_id = ? OR msg_remetente_id = ? AND msg_destinatario_id = ? ORDER BY msg_id", [row.users_id, req.params.id, req.params.id, row.users_id], (err, result) => {
-                    if(err) throw err;
-
-                    res.render('app', {admin: row, users: result1, title: "Whatzipps", conversa: result2[0], message: result})
-                })
-            })
-            
+            //console.log(result)
+            res.render('app', {admin: row, users: result, title: "Whatzipps"})
         })
+
+        // db.query("SELECT * FROM tbusers WHERE users_id != ?", [row.users_id], (err, result) => {
+        //     if(err) throw err;
+        //     let result1 = result;
+            
+        //     db.query("SELECT * FROM tbusers WHERE users_id = ?", [req.params.id], (err, result) => {
+        //         if(err) throw err;
+        //         let result2 = result;
+
+        //         db.query("SELECT * FROM tbmessages WHERE msg_remetente_id = ? AND msg_destinatario_id = ? OR msg_remetente_id = ? AND msg_destinatario_id = ? ORDER BY msg_id", [row.users_id, req.params.id, req.params.id, row.users_id], (err, result) => {
+        //             if(err) throw err;
+
+        //             res.render('app', {admin: row, users: result1, title: "Whatzipps", conversa: result2[0], message: result})
+        //         })
+        //     })
+            
+        // })
 
     } 
     else if(req.cookies.logado){
